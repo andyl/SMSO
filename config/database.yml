@@ -1,0 +1,19 @@
+common: &common
+  pool: 5
+  adapter:  postgresql
+  encoding: unicode
+  template: template0
+  username: smso
+  password: <%= POSTGRES_PASS %>
+
+development:
+  <<: *common
+  database: smso_development
+
+test:
+  <<: *common
+  database: smso_test
+
+production:
+  <<: *common
+  database: smso_production
