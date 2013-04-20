@@ -63,7 +63,7 @@ GEM
     columnize (0.3.6)
     connection_pool (1.0.0)
     daemons (1.1.9)
-    database_cleaner (1.0.0.RC1)
+    database_cleaner (0.9.1)
     debugger (1.5.0)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
@@ -236,7 +236,7 @@ DEPENDENCIES
   capistrano_colors
   capybara
   coffee-rails (~> 3.2.1)
-  database_cleaner (= 1.0.0.RC1)
+  database_cleaner
   debugger
   factory_girl_rails
   foreman

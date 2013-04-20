@@ -6,6 +6,12 @@ describe Parsers::NameParser do
 
   describe :comma do
     subject { parser.comma }
+
+    it "works now" do
+      x = 1
+      x.should == 1
+    end
+
     it { should parse ","     }
     it { should parse ", "    }
     it { should parse ",  "   }

@@ -51,13 +51,11 @@ group :development, :test do
   gem 'debugger'
 
   # ----- rspec -----
-  # rails4 database_cleaner issue see
-  # https://github.com/bmabey/database_cleaner/pull/189
-  gem "database_cleaner", "1.0.0.RC1"
   gem "launchy"
   gem "capybara"
   gem "rspec-rails"
   gem "shoulda-matchers"
+  gem "database_cleaner"
   gem "factory_girl_rails"
   gem "rspec-on-rails-matchers"
 
