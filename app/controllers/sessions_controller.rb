@@ -1,0 +1,44 @@
+class SessionsController < ApplicationController
+
+  def new
+    #member = Member.find_by_remember_me_token(cookies[:remember_me_token])
+    member = nil
+    unless member.nil?
+      session[:member_id] = member.id
+      session[:member_name] = member.short_name
+      ActiveSupport::Notifications.instrument("login.browser.cookie", {:member => member})
+      redirect_to (session[:tgt_path] || root_path), :notice => "Welcome back #{member.first_name}"
+    end
+  end
+
+  def create
+    users = UserSelectorSvc(params[:user_name])
+    user  = PasswordAuthenticationSvc.new(users).authenticate(params[:password])
+    user_name = params[:user_name].squeeze(' ').strip.gsub('.','_').gsub(' ', '_').downcase if params[:user_name]
+    member = Member.find_by_user_name(user_name)
+    if member && member.authenticate(params[:password])
+      BrowserProfile.create(params["browser"].merge({member_id: member.id}))
+      if params["remember_me"] == "1"
+        cookies[:remember_me_token] = {:value => member.remember_me_token, :expires => Time.now + 6.weeks}
+      else
+        cookies[:remember_me_token] = nil
+      end
+      ActiveSupport::Notifications.instrument("login.browser.form", {:member => member})
+      member_login(member)
+      redirect_to (session[:tgt_path] || root_path), :notice => "Logged in!"
+    else
+      ActiveSupport::Notifications.instrument("login.browser.invalid", {:text => params[:user_name]})
+      flash.now.alert = "Invalid user name or password"
+      render "new"
+    end
+  end
+
+  def destroy
+    ActiveSupport::Notifications.instrument("logout.browser", {:member => current_member})
+    session[:member_id] = nil
+    session[:member_name] = nil
+    cookies[:remember_me_token] = nil
+    redirect_to root_path, :notice => "Logged out!"
+  end
+
+end
