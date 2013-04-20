@@ -10,6 +10,23 @@ describe User do
    specify { @obj.should respond_to(:user_name)  }
  end
 
+ describe "Object Creation" do
+    it "works with a user_name attribute" do
+      @obj = User.new(:user_name => "xxx_yyy")
+      @obj.should be_valid
+      @obj.first_name.should == "Xxx"
+      @obj.last_name.should == "Yyy"
+      @obj.user_name.should == "xxx_yyy"
+    end
+    it "works with user name attributes" do
+      @obj = User.new(:first_name => "Xxx", :last_name => "Yyy")
+      @obj.should be_valid
+      @obj.first_name.should == "Xxx"
+      @obj.last_name.should == "Yyy"
+      @obj.user_name.should == "xxx_yyy"
+    end
+ end
+
  describe "#full_name" do
 
  end
@@ -40,23 +57,6 @@ describe User do
  #       User.create!(:user_name => "joe_louis", :password => "qwerasdf")
  #     end
  #     it { should validate_uniqueness_of(:user_name)        }
- #   end
- # end
-
- # describe "Object Creation" do
- #   it "works with a user_name attribute" do
- #     @obj = User.new(:user_name => "xxx_yyy")
- #     @obj.should be_valid
- #     @obj.first_name.should == "Xxx"
- #     @obj.last_name.should == "Yyy"
- #     @obj.user_name.should == "xxx_yyy"
- #   end
- #   it "works with user name attributes" do
- #     @obj = User.new(:first_name => "Xxx", :last_name => "Yyy")
- #     @obj.should be_valid
- #     @obj.first_name.should == "Xxx"
- #     @obj.last_name.should == "Yyy"
- #     @obj.user_name.should == "xxx_yyy"
  #   end
  # end
 

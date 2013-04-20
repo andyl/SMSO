@@ -33,7 +33,14 @@ gem "sidekiq"                     # background job queue manager
 gem "foreman"                     # init/upstart - see 'Procfile'
 gem "whenever", :require => false # cron jobs - see 'schedule.rb'
 
+# ----- rails4 compatibility -----
+gem 'strong_parameters'
+gem 'cache_digests'
+
 group :assets do
+  # rails4 compatibility - fast asset compile
+  gem 'turbo-sprockets-rails3'
+
   gem 'therubyracer',    platforms: :ruby
   gem 'uglifier',        '>= 1.0.3'
   gem 'sass-rails',      '~> 3.2.3'  # CSS framework
@@ -51,8 +58,9 @@ group :development, :test do
   gem 'debugger'
 
   # ----- rspec -----
-  gem "launchy"
-  gem "capybara"
+  gem "webrat"                       # supplies 'contain' matcher for view specs...
+  gem "launchy"                      # needed for 'save and open page'
+  gem "capybara"                     # used for feature specs
   gem "rspec-rails"
   gem "shoulda-matchers"
   gem "database_cleaner"

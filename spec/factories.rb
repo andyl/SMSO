@@ -3,6 +3,8 @@ FactoryGirl.define do
   factory :user do
     first_name "John"
     sequence :last_name  do |n| "Do#{'e' * n}" end
+    password "welcome"
+    password_confirmation "welcome"
     
     #ignore do add_count 3 end
     

@@ -1,14 +1,20 @@
 # Find a user from the email address, username or userid.
+# returns one user, or nil
 
-class UserSelectorSvc
+class UserFinderSvc
 
-  def self.find_by_user_name(input_string)
+  # Public: Find a user by email, username or userid.
+  #
+  # identifier: can be an email address, username or userid
+  #
+  # Returns a single User or nil if there is no match.
+  def self.by_username(identifier)
 
   end
 
   private
 
-  def self.input_type(input_string)
+  def self.identifier_type(input_string)
     return "email" if email?(input_string)
     return "username" if username?(input_string)
     return "userid"

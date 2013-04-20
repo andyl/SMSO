@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    users = UserSelectorSvc(params[:user_name])
+    users = UserFinderSvc.find_by_user_name(params[:user_name])
     user  = PasswordAuthenticationSvc.new(users).authenticate(params[:password])
     user_name = params[:user_name].squeeze(' ').strip.gsub('.','_').gsub(' ', '_').downcase if params[:user_name]
     member = Member.find_by_user_name(user_name)

@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
   # ----- Attributes -----
 
   # ----- Associations -----
+  # has_many :emails,             :order => 'position', :dependent => :destroy
   # has_many :addresses,          :order => 'position', :dependent => :destroy
   # has_many :phones,             :order => 'position', :dependent => :destroy
-  # has_many :emails,             :order => 'position', :dependent => :destroy
   # has_many :avatars,            :order => 'position', :dependent => :destroy
   # has_many :other_infos,        :order => 'position', :dependent => :destroy
   # has_many :emergency_contacts, :order => 'position', :dependent => :destroy
