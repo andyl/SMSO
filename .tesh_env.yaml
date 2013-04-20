@@ -1,0 +1,15 @@
+---
+:tst_include_pattern:
+- spec/**/*_spec.rb
+:tst_exclude_pattern:
+- spec/_*/**/*_spec.rb
+:app_include_pattern:
+- app/**/*.rb
+- app/**/*.erb
+- lib/**/*.rb
+:app_exclude_pattern: []
+:test_pattern: parser_spec
+:test_files: spec/lib/parsers/name_parser_spec.rb spec/lib/parsers/address_parser_spec.rb
+:test_line: 
+:command_args: 
+:command: zeus rspec -O spec/spec.opts

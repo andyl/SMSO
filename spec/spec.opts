@@ -1,0 +1,4 @@
+-I /home/aleak/lr/SMSO-ESB/spec
+--colour
+--fail-fast
+--format progress
