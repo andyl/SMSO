@@ -1,0 +1,18 @@
+function zrake {
+  ZCMD="zeus"
+  [ -z `which zeus` ] && ZCMD=""
+  echo "$ZCMD rake $1"
+  $ZCMD rake $1
+}
+
+echo ----- drop the old database
+rake db:drop
+
+echo ----- create a new database
+rake db:create
+
+echo ----- load the backup
+rake db:load --trace
+
+echo ----- create the test database
+rake db:migrate RAILS_ENV=test

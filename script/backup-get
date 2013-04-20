@@ -1,0 +1,16 @@
+function zrake {
+  ZCMD="zeus"
+  [ -z `which zeus` ] && ZCMD=""
+  echo "$ZCMD rake $1"
+  $ZCMD rake $1
+}
+
+echo ----- generate backup
+cap backup:generate:all
+
+echo ----- download backup
+cap backup:download:all
+
+echo ----- restore backup
+zrake ops:restore:all
+
