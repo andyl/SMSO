@@ -106,12 +106,13 @@ class BaseMigration < ActiveRecord::Migration
     # ----- team data -----
     
     create_table "teams" do |t|
-      t.string "name"
+      t.string      "name"
+      t.string      "subdomain"
       t.timestamps
     end
 
-    #create_table "roles" do |t|
-    #  t.integer  "member_id"
+    #create_table "team_roles" do |t|
+    #  t.integer  "team_id"
     #  t.string   "typ"
     #  t.datetime "created_at"
     #  t.datetime "updated_at"
@@ -119,9 +120,16 @@ class BaseMigration < ActiveRecord::Migration
 
     # ----- team reference -----
 
+    create_table "team_tweets" do |t|
+      t.integer  "team_id"
+      t.integer  "member_id"
+      t.text     "body"
+      t.timestamps
+    end
+
     #create_table "team_files" do |t|
-    #  t.integer  "member_id"
     #  t.integer  "team_id"
+    #  t.integer  "member_id"
     #  t.string   "team_file_file_extension"
     #  t.string   "team_file_file_name"
     #  t.string   "team_file_file_size"
@@ -132,7 +140,7 @@ class BaseMigration < ActiveRecord::Migration
     #  t.string   "caption"
     #  t.timestamps
     #end
-    #
+
     #create_table "team_links" do |t|
     #  t.integer  "team_id"
     #  t.integer  "member_id"
@@ -168,6 +176,7 @@ class BaseMigration < ActiveRecord::Migration
     # ----- event data -----
 
     #create_table "events" do |t|
+    #  t.integer  "team_id"
     #  t.string   "typ"
     #  t.string   "title"
     #  t.string   "leaders"

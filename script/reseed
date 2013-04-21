@@ -1,0 +1,14 @@
+echo ----- drop the old database
+rake db:drop
+
+echo ----- create a new database
+rake db:create
+
+echo ----- run migrations
+rake db:migrate
+
+echo ----- load seed data
+rake db:seed
+
+echo ----- create the test database
+rake db:migrate RAILS_ENV=test

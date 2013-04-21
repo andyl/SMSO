@@ -1,15 +1,19 @@
 class Team < ActiveRecord::Base
 
   # ----- Attributes -----
+  cattr_accessor :current_id
 
   # ----- Associations -----
-  has_many :members
-  
+  has_many :tweets,  :dependent => :destroy
+  has_many :members, :dependent => :destroy
+  has_many :users,   :through   => :members
+
   # ----- Validations -----
   
   # ----- Callbacks -----
   
   # ----- Scopes -----
+  default_scope { where(team_id: Team.current_id) }
 
   # ----- Class Methods ----
 

@@ -1,5 +1,14 @@
 FactoryGirl.define do
 
+  factory :team do
+    sequence :name      do |n| "Team#{n}" end
+    sequence :subdomain do |n| "team#{n}" end
+  end
+
+  factory :team_tweet do
+    sequence :body do |n| "team tweet ##{n}" end
+  end
+
   factory :user do
     first_name "John"
     sequence :last_name  do |n| "Do#{'e' * n}" end

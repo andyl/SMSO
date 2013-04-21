@@ -1,12 +1,10 @@
-class Member < ActiveRecord::Base
+class TeamTweet < ActiveRecord::Base
 
   # ----- Attributes -----
 
   # ----- Associations -----
-  has_one  :user
-  has_one  :team
-  has_one  :rank
-  has_many :tweets,              :dependent => :destroy
+  has_one   :member
+  has_one   :team
 
   # ----- Validations -----
   

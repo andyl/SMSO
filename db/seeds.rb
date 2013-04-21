@@ -10,7 +10,48 @@ require 'factory_girl_rails'
 
 User.all.each {|usr| usr.destroy}
 
-FactoryGirl.create(:user, first_name: "Andy", last_name: "Leak")
-FactoryGirl.create(:user)
-FactoryGirl.create(:user)
-FactoryGirl.create(:user)
+al = FactoryGirl.create(:user, first_name: "Andy",  last_name: "Leak")
+db = FactoryGirl.create(:user, first_name: "Dan",   last_name: "Bennett")
+js = FactoryGirl.create(:user, first_name: "Joe",   last_name: "Sheridan")
+cc = FactoryGirl.create(:user, first_name: "Chris", last_name: "Co")
+ml = FactoryGirl.create(:user, first_name: "Mark",  last_name: "Lopensky")
+mr = FactoryGirl.create(:user, first_name: "Matt",  last_name: "Rossi")
+wg = FactoryGirl.create(:user, first_name: "Will",  last_name: "Gillmore")
+la = FactoryGirl.create(:user, first_name: "Lars",  last_name: "Antholtz")
+
+t1 = FactoryGirl.create(:team, name: "SCU",    subdomain: "scu")
+t2 = FactoryGirl.create(:team, name: "ESB",    subdomain: "esb")
+t3 = FactoryGirl.create(:team, name: "SVIP",   subdomain: "svip")
+t4 = FactoryGirl.create(:team, name: "BAMRU",  subdomain: "bamru")
+t5 = FactoryGirl.create(:team, name: "SMCSAR", subdomain: "smcsar")
+
+def adduser(team, member)
+  team.users << member
+  team.save
+end
+
+def addtweet(team, member)
+  team.tweets << FactoryGirl.create(:team_tweet, :member_id => member.id)
+  team.save
+end
+
+adduser t1, db
+adduser t1, la
+adduser t2, js
+adduser t3, cc
+adduser t4, al
+adduser t4, wg
+adduser t4, la
+adduser t5, ml
+adduser t5, mr
+
+addtweet(t1, db)
+addtweet(t1, db)
+addtweet(t1, la)
+addtweet(t4, al)
+addtweet(t4, la)
+
+
+
+
+

@@ -3,6 +3,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_time_zone
+  around_filter :scope_current_team
+
+  def scope_current_team
+    Team.current_id = current_tenant.id
+    yeild
+  ensure
+    Team.current_id = nil
+  end
 
   def set_time_zone
     Time.zone = "Pacific Time (US & Canada)"
@@ -11,6 +19,11 @@ class ApplicationController < ActionController::Base
   def current_ability
     @current_ability ||= Ability.new(current_member)
   end
+
+  def current_team
+    Team.find_by_subdomain! request.subdomain
+  end
+  helper_method :current_team
 
   def remember_me_setup(params, user)
     if params["remember_me"] == "1"
