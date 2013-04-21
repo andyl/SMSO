@@ -12,19 +12,17 @@ class SessionsController < ApplicationController
   end
 
   def create
-    users = UserFinderSvc.find_by_user_name(params[:user_name])
-    user  = PasswordAuthenticationSvc.new(users).authenticate(params[:password])
-    user_name = params[:user_name].squeeze(' ').strip.gsub('.','_').gsub(' ', '_').downcase if params[:user_name]
-    member = Member.find_by_user_name(user_name)
-    if member && member.authenticate(params[:password])
-      BrowserProfile.create(params["browser"].merge({member_id: member.id}))
+    user = UserFinderSvc.by_username(params[:user_name])
+    auth = PasswordAuthenticationSvc.new
+    if user && auth.authenticate(params[:password])
+      #BrowserProfile.create(params["browser"].merge({member_id: member.id}))
       if params["remember_me"] == "1"
-        cookies[:remember_me_token] = {:value => member.remember_me_token, :expires => Time.now + 6.weeks}
+        cookies[:remember_me_token] = {:value => user.remember_me_token, :expires => Time.now + 6.weeks}
       else
         cookies[:remember_me_token] = nil
       end
-      ActiveSupport::Notifications.instrument("login.browser.form", {:member => member})
-      member_login(member)
+      #ActiveSupport::Notifications.instrument("login.browser.form", {:member => member})
+      member_login(user)
       redirect_to (session[:tgt_path] || root_path), :notice => "Logged in!"
     else
       ActiveSupport::Notifications.instrument("login.browser.invalid", {:text => params[:user_name]})

@@ -16,7 +16,8 @@ describe SessionsController do
 
     it "handles form input" do
       pending "learn how to set up mocks"
-      UserFinderSvc.should_receive(:find_by_user_name).and_return(nil)
+      user = FactoryGirl.build(:user)
+      UserFinderSvc.should_receive(:by_username).and_return(user)
       post :create, user_name: "2", password: "welcome"
       response.should_not be_nil
     end

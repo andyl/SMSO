@@ -15,6 +15,7 @@ gem 'jquery-rails'
 
 # ----- misc -----
 gem 'bcrypt-ruby', '~> 3.0.0'   # for 'has-secure-password'
+gem 'cancan'                    # access control
 gem 'parslet'                   # for address and name parsers
 
 # ----- web servers -----
@@ -22,11 +23,10 @@ gem 'thin'
 gem 'unicorn'
 
 # ----- console tools -----
-gem "hirb"
-gem "wirble"
-gem "interactive_editor"
-gem "awesome_print", :require => "ap"
-gem "rb-readline"
+gem "hirb"                     # table-display
+gem "wirble"                   # colorized IRB display
+gem "interactive_editor"       # enter 'vim' from the console
+gem "rb-readline"              # up and down arrows
 
 # ----- process managers -----
 gem "sidekiq"                     # background job queue manager

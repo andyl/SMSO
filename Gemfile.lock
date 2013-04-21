@@ -33,13 +33,13 @@ GEM
       rake
     arel (3.0.2)
     atomic (1.1.8)
-    awesome_print (1.1.0)
     bcrypt-ruby (3.0.1)
     blankslate (2.1.2.4)
     builder (3.0.4)
     cache_digests (0.3.0)
       actionpack (>= 3.2)
       thread_safe
+    cancan (1.6.9)
     capistrano (2.14.2)
       highline
       net-scp (>= 1.0.0)
@@ -247,9 +247,9 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  awesome_print
   bcrypt-ruby (~> 3.0.0)
   cache_digests
+  cancan
   capistrano
   capistrano_colors
   capybara

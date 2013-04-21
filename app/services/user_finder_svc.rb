@@ -1,35 +1,24 @@
-# Find a user from the email address, username or userid.
-# returns one user, or nil
+require [Rails.root.to_s, "/lib/ext/string"].join
 
+# Public: Various methods for retrieving users fom the database.
+#
 class UserFinderSvc
 
-  # Public: Find a user by email, username or userid.
+  # Public: Find a user by email, username or userid. The username
+  # is typically the label used on the login form field.
   #
-  # identifier: can be an email address, username or userid
+  # identifier: an email address, username or userid
   #
   # Returns a single User or nil if there is no match.
+  #
   def self.by_username(identifier)
-
-  end
-
-  private
-
-  def self.identifier_type(input_string)
-    return "email" if email?(input_string)
-    return "username" if username?(input_string)
-    return "userid"
-  end
-
-  def self.email?(input_string)
-    input_string.include? '@' && input_string[0] != '@'
-  end
-
-  def self.username?(input_string)
-    ! email?(input_string) && input_string.
-    string.split()
-  end
-
-  def self.userid?(input_string)
+    return User.find(identifier) if identifier.is_a?(Integer)
+    case identifier.identification_type
+      when "userid"   then User.find(identifier)
+      when "username" then User.where(user_name: identifier.username_normalize).first
+      when "email"    then nil # TODO: implement email lookup...
+      else nil
+    end
   end
 
 end
