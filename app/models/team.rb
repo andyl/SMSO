@@ -4,26 +4,32 @@ class Team < ActiveRecord::Base
   cattr_accessor :current_id
 
   # ----- Associations -----
-  has_many :tweets,  :dependent => :destroy
-  has_many :members, :dependent => :destroy
-  has_many :users,   :through   => :members
+  has_many :team_tweets,  :dependent => :destroy
+  has_many :memberships,  :dependent => :destroy
+  has_many :users,        :through   => :memberships, :uniq => true
 
   # ----- Validations -----
+  validates_presence_of    :name, :subdomain
+  validates_uniqueness_of  :name, :subdomain
   
   # ----- Callbacks -----
   
   # ----- Scopes -----
-  default_scope { where(team_id: Team.current_id) }
+  default_scope { where(id: Team.current_id) }
 
   # ----- Class Methods ----
 
-  # ----- Virtual Attributes (Accessors) -----
-
-  # ----- Virtual Attributes (Readers) -----
-
   # ----- Instance Methods -----
-
-  # ----- For Error Reporting -----
 
 end
 
+# == Schema Information
+#
+# Table name: teams
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  subdomain  :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#

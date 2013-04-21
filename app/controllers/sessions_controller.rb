@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+  skip_around_filter :scope_current_team
+
   def new
     #member = Member.find_by_remember_me_token(cookies[:remember_me_token])
     member = nil

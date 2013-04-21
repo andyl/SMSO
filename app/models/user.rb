@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   has_secure_password
 
   # ----- Associations -----
+  has_many :memberships
+  has_many :teams,    :through => :memberships, :uniq => true
   # has_many :emails,             :order => 'position', :dependent => :destroy
   # has_many :addresses,          :order => 'position', :dependent => :destroy
   # has_many :phones,             :order => 'position', :dependent => :destroy
@@ -83,3 +85,27 @@ class User < ActiveRecord::Base
   end
 
 end
+
+# == Schema Information
+#
+# Table name: users
+#
+#  id                         :integer          not null, primary key
+#  user_name                  :string(255)
+#  first_name                 :string(255)
+#  middle_name                :string(255)
+#  last_name                  :string(255)
+#  title                      :string(255)
+#  developer                  :boolean          default(FALSE)
+#  sign_in_count              :integer          default(0)
+#  password_digest            :string(255)
+#  ip_address                 :string(255)
+#  remember_me_token          :string(255)
+#  forgot_password_token      :string(255)
+#  remember_me_created_at     :datetime
+#  forgot_password_expires_at :datetime
+#  last_sign_in_at            :datetime
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#
+

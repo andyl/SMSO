@@ -9,6 +9,11 @@ FactoryGirl.define do
     sequence :body do |n| "team tweet ##{n}" end
   end
 
+  factory :membership do
+    sequence :team_id do |n| n end
+    sequence :user_id do |n| n end
+  end
+
   factory :user do
     first_name "John"
     sequence :last_name  do |n| "Do#{'e' * n}" end

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   around_filter :scope_current_team
 
   def scope_current_team
-    Team.current_id = current_tenant.id
+    Team.current_id = current_team.id
     yeild
   ensure
     Team.current_id = nil
@@ -109,7 +109,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_member
-    @current_member ||= Member.find(session[:member_id]) if session[:member_id]
+    @current_member ||= Membership.find(session[:member_id]) if session[:member_id]
   end
 
   def member_signed_in?
@@ -124,7 +124,7 @@ class ApplicationController < ActionController::Base
   # curl -u user_name:pass http://bamru.net/reports/BAMRU-report.csv
   #    note: user_name should be in the form of user_name, not user.name
   def authenticate_member_with_basic_auth!
-    if member = authenticate_with_http_basic { |u,p| Member.find_by_user_name(u).authenticate(p) }
+    if member = authenticate_with_http_basic { |u,p| Membership.find_by_user_name(u).authenticate(p) }
       session[:member_id] = member.id
     else
       authenticate_api_member!

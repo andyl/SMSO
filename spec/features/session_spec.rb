@@ -9,12 +9,13 @@ describe "Session", :capybara => true do
   end
 
   it "handles a valid login" do
-    pending "sort out the user model"
     @user = FactoryGirl.create :user
     visit "/login"
-    fill_in "User Name", with: @user.full_name
+    fill_in "User name", with: @user.id
     fill_in "Password",  with: "welcome"
-    click "Log in"
+    click_button "Log in"
+    current_path.should == root_path
+    page.should_not be_nil
   end
 
 end

@@ -88,39 +88,48 @@ describe User do
 
   end
 
+  describe "Associations" do
+     before(:each) { @obj = User.new }
+     specify { @obj.should respond_to(:teams)           }
+     specify { @obj.should respond_to(:memberships)     }
+  end
 
-  # describe "Associations" do
-  #   before(:each) { @obj = User.new }
-  #   specify { @obj.should respond_to(:addresses)       }
-  #   specify { @obj.should respond_to(:phones)          }
-  #   specify { @obj.should respond_to(:emails)          }
-  #   specify { @obj.should respond_to(:roles)           }
-  #   specify { @obj.should respond_to(:avatars)         }
-  # end
-
-  # describe "Instance Methods" do
-  #   before(:each) { @obj = User.new }
-  # end
-
-  # describe "Validations" do
-  #   context "self-contained" do
-  #     it { should validate_presence_of(:user_name)               }
-  #     it { should validate_presence_of(:first_name)              }
-  #     it { should validate_presence_of(:last_name)               }
-  #     it { should validate_format_of(:user_name).with("xxx_yyy") }
-  #     it { should validate_presence_of(:user_name)               }
-  #   end
-  #   context "inter-object" do
-  #     before(:each) do
-  #       User.create!(:user_name => "joe_louis", :password => "qwerasdf")
-  #     end
-  #     it { should validate_uniqueness_of(:user_name)        }
-  #   end
-  # end
-
-  describe "Validation" do
-
+  describe "Validations" do
+     context "self-contained" do
+       it { should validate_presence_of(:user_name)               }
+       it { should validate_presence_of(:first_name)              }
+       it { should validate_presence_of(:last_name)               }
+       it { should validate_presence_of(:user_name)               }
+       it { should allow_value("xxx_yyy").for(:user_name)         }
+     end
+     context "inter-object" do
+       before(:each) { User.create!(valid_params) }
+       it { should validate_uniqueness_of(:user_name)        }
+     end
   end
 
 end
+
+# == Schema Information
+#
+# Table name: users
+#
+#  id                         :integer          not null, primary key
+#  user_name                  :string(255)
+#  first_name                 :string(255)
+#  middle_name                :string(255)
+#  last_name                  :string(255)
+#  title                      :string(255)
+#  developer                  :boolean          default(FALSE)
+#  sign_in_count              :integer          default(0)
+#  password_digest            :string(255)
+#  ip_address                 :string(255)
+#  remember_me_token          :string(255)
+#  forgot_password_token      :string(255)
+#  remember_me_created_at     :datetime
+#  forgot_password_expires_at :datetime
+#  last_sign_in_at            :datetime
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#
 

@@ -1,10 +1,10 @@
-class Member < ActiveRecord::Base
+class Membership < ActiveRecord::Base
 
   # ----- Attributes -----
 
   # ----- Associations -----
-  has_one  :user
-  has_one  :team
+  belongs_to  :user
+  belongs_to  :team
   has_one  :rank
   has_many :tweets,              :dependent => :destroy
 
@@ -27,3 +27,15 @@ class Member < ActiveRecord::Base
 
 end
 
+# == Schema Information
+#
+# Table name: memberships
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  team_id    :integer
+#  typ        :string(255)
+#  admin      :boolean          default(FALSE)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#

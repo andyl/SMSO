@@ -46,7 +46,6 @@ group :assets do
   gem 'sass-rails',      '~> 3.2.3'  # CSS framework
   gem 'coffee-rails',    '~> 3.2.1'  # coffeescript support
   gem 'zurb-foundation', '~> 4.0.0'  # ui framework
-  gem 'teabag'                       # framework for javascript unit tests
 end
 
 group :development, :test do
@@ -58,14 +57,16 @@ group :development, :test do
   gem 'debugger'
 
   # ----- rspec -----
-  gem "webrat"                       # supplies 'contain' matcher for view specs...
-  gem "launchy"                      # needed for 'save and open page'
-  gem "capybara"                     # used for feature specs
-  gem "rspec-rails"                  # RSPEC
-  gem "shoulda-matchers"
-  gem "database_cleaner"
-  gem "factory_girl_rails"           # object factories - defined in spec/factory.rb
-  gem "rspec-on-rails-matchers"
+  gem "webrat"                   # 'contain' matcher for view specs...
+  gem "launchy"                  # needed for 'save and open page'
+  gem "capybara"                 # used for feature specs
+  gem "rspec-rails"              # RSPEC
+  gem "shoulda-matchers"         # 'should_belong_to' matchers
+  gem "database_cleaner"         # empty database between test runs
+  gem "factory_girl_rails"       # defined in spec/factory.rb
+
+  # ----- teabag -----
+  gem 'teabag'                   # framework for javascript unit tests
 
   # ----- add DB fields to models & specs -----
   gem "annotate"

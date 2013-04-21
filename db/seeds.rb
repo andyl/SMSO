@@ -25,13 +25,12 @@ t3 = FactoryGirl.create(:team, name: "SVIP",   subdomain: "svip")
 t4 = FactoryGirl.create(:team, name: "BAMRU",  subdomain: "bamru")
 t5 = FactoryGirl.create(:team, name: "SMCSAR", subdomain: "smcsar")
 
-def adduser(team, member)
-  team.users << member
-  team.save
+def adduser(team, user)
+  FactoryGirl.create(:membership, :team_id => team.id, :user_id => user.id)
 end
 
 def addtweet(team, member)
-  team.tweets << FactoryGirl.create(:team_tweet, :member_id => member.id)
+  team.team_tweets << FactoryGirl.create(:team_tweet, :member_id => member.id)
   team.save
 end
 

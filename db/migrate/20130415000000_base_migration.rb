@@ -95,7 +95,7 @@ class BaseMigration < ActiveRecord::Migration
 
     # ----- member data -----
 
-    create_table "members" do |t|
+    create_table "memberships" do |t|
       t.integer  "user_id"
       t.integer  "team_id"
       t.string   "typ"
@@ -122,7 +122,7 @@ class BaseMigration < ActiveRecord::Migration
 
     create_table "team_tweets" do |t|
       t.integer  "team_id"
-      t.integer  "member_id"
+      t.integer  "membership_id"
       t.text     "body"
       t.timestamps
     end

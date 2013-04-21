@@ -1,6 +1,6 @@
 
 def create_member(username)
-  mem = Member.find_or_create_by_user_name_and_typ(username, "FM")
+  mem = Membership.find_or_create_by_user_name_and_typ(username, "FM")
   puts('*' * 60, "NO MEM") if mem.blank?
   mem
 end

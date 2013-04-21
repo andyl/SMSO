@@ -3,7 +3,7 @@ class TeamTweet < ActiveRecord::Base
   # ----- Attributes -----
 
   # ----- Associations -----
-  has_one   :member
+  has_one   :membership
   has_one   :team
 
   # ----- Validations -----
@@ -25,3 +25,14 @@ class TeamTweet < ActiveRecord::Base
 
 end
 
+# == Schema Information
+#
+# Table name: team_tweets
+#
+#  id         :integer          not null, primary key
+#  team_id    :integer
+#  member_id  :integer
+#  body       :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
