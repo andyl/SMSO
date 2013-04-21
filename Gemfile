@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby "1.9.3"
 
 # ----- rails -----
-gem 'rails',          '3.2.13'
+gem 'rails', '3.2.13'
 
 # ----- databases -----
 gem 'pg'        # SQL datastore
@@ -38,7 +38,7 @@ gem 'strong_parameters'
 gem 'cache_digests'
 
 group :assets do
-  # rails4 compatibility - fast asset compile
+  # for rails4 compatibility - fast asset compile
   gem 'turbo-sprockets-rails3'
 
   gem 'therubyracer',    platforms: :ruby
@@ -61,10 +61,10 @@ group :development, :test do
   gem "webrat"                       # supplies 'contain' matcher for view specs...
   gem "launchy"                      # needed for 'save and open page'
   gem "capybara"                     # used for feature specs
-  gem "rspec-rails"
+  gem "rspec-rails"                  # RSPEC
   gem "shoulda-matchers"
   gem "database_cleaner"
-  gem "factory_girl_rails"
+  gem "factory_girl_rails"           # object factories - defined in spec/factory.rb
   gem "rspec-on-rails-matchers"
 
   # ----- add DB fields to models & specs -----

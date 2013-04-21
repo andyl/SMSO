@@ -12,16 +12,23 @@ class ApplicationController < ActionController::Base
     @current_ability ||= Ability.new(current_member)
   end
 
-  def member_login(member)
-    session[:member_id] = member.id
-    session[:member_name] = member.short_name
-    new_member = Member.where(:id => member.id).first
-    new_member.sign_in_count   += 1
-    new_member.last_sign_in_at = Time.now
-    new_member.ip_address      = request.remote_ip
-    new_member.password = ""
-    new_member.password_confirmation = ""
-    new_member.save
+  def remember_me_setup(params, user)
+    if params["remember_me"] == "1"
+      cookies[:remember_me_token] = {:value => user.remember_me_token, :expires => Time.now + 6.weeks}
+    else
+      cookies[:remember_me_token] = nil
+    end
+  end
+
+  def user_login(user)
+    session[:member_id] = user.id
+    session[:member_name] = user.full_name
+    user.sign_in_count   += 1
+    user.last_sign_in_at = Time.now
+    user.ip_address      = request.remote_ip
+    user.password        = ""
+    user.password_confirmation = ""
+    user.save
   end
 
   def local_cast(channel, string)

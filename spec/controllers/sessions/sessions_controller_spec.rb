@@ -15,9 +15,9 @@ describe SessionsController do
   describe "POST create" do
 
     it "handles form input" do
-      pending "learn how to set up mocks"
       user = FactoryGirl.build(:user)
       UserFinderSvc.should_receive(:by_username).and_return(user)
+      user.should_receive(:authenticate).and_return(true)
       post :create, user_name: "2", password: "welcome"
       response.should_not be_nil
     end

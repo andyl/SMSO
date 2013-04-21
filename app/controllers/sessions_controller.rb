@@ -13,26 +13,21 @@ class SessionsController < ApplicationController
 
   def create
     user = UserFinderSvc.by_username(params[:user_name])
-    auth = PasswordAuthenticationSvc.new
-    if user && auth.authenticate(params[:password])
+    if user && user.authenticate(params[:password])
       #BrowserProfile.create(params["browser"].merge({member_id: member.id}))
-      if params["remember_me"] == "1"
-        cookies[:remember_me_token] = {:value => user.remember_me_token, :expires => Time.now + 6.weeks}
-      else
-        cookies[:remember_me_token] = nil
-      end
       #ActiveSupport::Notifications.instrument("login.browser.form", {:member => member})
-      member_login(user)
+      remember_me_setup(params, user)
+      user_login(user)
       redirect_to (session[:tgt_path] || root_path), :notice => "Logged in!"
     else
-      ActiveSupport::Notifications.instrument("login.browser.invalid", {:text => params[:user_name]})
+      #ActiveSupport::Notifications.instrument("login.browser.invalid", {:text => params[:user_name]})
       flash.now.alert = "Invalid user name or password"
       render "new"
     end
   end
 
   def destroy
-    ActiveSupport::Notifications.instrument("logout.browser", {:member => current_member})
+    #ActiveSupport::Notifications.instrument("logout.browser", {:member => current_member})
     session[:member_id] = nil
     session[:member_name] = nil
     cookies[:remember_me_token] = nil
