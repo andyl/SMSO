@@ -1,20 +1,28 @@
 SMSO::Application.routes.draw do
 
-  zesb_pages  = %w(index banded banner blog boxy contact feed grid icons)
-  zesb_pages += %w(marketing orbit realty sidebar store tables workspace)
-  zesb_pages.each do |page|
-    get  "/zesb/#{page}"  => "zesb##{page}"
+  def get_pages(page_list, controller)
+    page_list.each do |page|
+      get "/#{controller}/#{page}" => "#{controller}##{page}"
+    end
   end
 
-  home_pages = %w(index)
-  home_pages.each do |page|
-    get "/home/#{page}" => "home##{page}"
-  end
+  zp1 = %w(index banded banner blog boxy contact feed grid icons)
+  zp2 = %w(marketing orbit realty sidebar store tables workspace)
+  ZESB_PAGES = zp1 + zp2
+  SMSO_PAGES = %w(index)
+  HOME_PAGES = %w(index)
+
+  get_pages ZESB_PAGES, "zesb"
+  get_pages HOME_PAGES, "home"
+  get_pages SMSO_PAGES, "smso"
 
   get "login"  => "sessions#new",     :as => "login"
   get "logout" => "sessions#destroy", :as => "logout"
 
   resources :sessions
+  resources :users
+  resources :members
+  resources :team_tweets
 
   root :to => 'home#index'
 

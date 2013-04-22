@@ -8,9 +8,8 @@ describe "Home", :capybara => true do
     page.should_not be_nil
   end
 
-  home_pages  = %w(index)
-  home_pages.each do |zpage|
-    it "renders zesb/#{zpage}" do
+  HOME_PAGES.each do |zpage|
+    it "renders home/#{zpage}" do
       visit "/home/#{zpage}"
       current_path.should == "/home/#{zpage}"
       page.should_not be_nil

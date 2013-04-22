@@ -18,4 +18,14 @@ describe "Session", :capybara => true do
     page.should_not be_nil
   end
 
+  it "handles invalid login" do
+    visit "/login"
+    fill_in "User name", with: "nonsense"
+    fill_in "Password",  with: "whatever"
+    click_button "Log in"
+    current_path.should == "/sessions"
+    page.should_not be_nil
+    page.should have_content "Invalid user name or password"
+  end
+
 end
