@@ -36,4 +36,25 @@ class SessionsController < ApplicationController
     redirect_to root_path, :notice => "Logged out!"
   end
 
+  private
+
+  def remember_me_setup(params, user)
+    if params["remember_me"] == "1"
+      cookies[:remember_me_token] = {:value => user.remember_me_token, :expires => Time.now + 6.weeks}
+    else
+      cookies[:remember_me_token] = nil
+    end
+  end
+
+  def user_login(user)
+    session[:member_id] = user.id
+    session[:member_name] = user.full_name
+    user.sign_in_count   += 1
+    user.last_sign_in_at = Time.now
+    user.ip_address      = request.remote_ip
+    user.password        = ""
+    user.password_confirmation = ""
+    user.save
+  end
+
 end

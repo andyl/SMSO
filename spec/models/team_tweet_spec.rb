@@ -4,16 +4,16 @@ describe TeamTweet do
 
   def valid_params
     {
-      member_id:       1,
-      team_id:         1,
+      membership_id:       1,
+      team_id:             1,
       body:      "some text here"
     }
   end
 
   describe "Object Attributes" do
     before(:each) { @obj = FactoryGirl.build(:team_tweet) }
-    specify { @obj.should respond_to(:member_id)  }
-    specify { @obj.should respond_to(:team_id)    }
+    specify { @obj.should respond_to(:membership_id)  }
+    specify { @obj.should respond_to(:team_id)        }
   end
 
   describe "Object Creation" do

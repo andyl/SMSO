@@ -28,11 +28,14 @@
     <div class="row">
       <div class="large-12">
         <b>Welcome</b><p></p>
-        This site is Under Construction<p></p>
+        This site is Under Construction!!<p></p>
       </div>
       <div class="large-12">
-        <b>Mockups</b><p></p>
-        <a class='medium button hide-for-touch' href='/zesb/index'>Mockup Index</a>
+        <b>Identification</b><p></p>
+        <li>Your team name is <%= current_team.name %></li>
+        <li>Your memberID is <%= current_membership.id %></li>
+        <li>Your full name is <%= current_user.name %></li>
+        <li>Your userID is <%= current_user.id %></li>
       </div>
     </div>
 

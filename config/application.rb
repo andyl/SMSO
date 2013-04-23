@@ -23,7 +23,7 @@ module SMSO
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    %w(services).each do |dir| 
+    %w(services).each do |dir|
       config.autoload_paths += %W(#{config.root}/app/#{dir})
     end
 

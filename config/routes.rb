@@ -9,8 +9,8 @@ SMSO::Application.routes.draw do
   zp1 = %w(index banded banner blog boxy contact feed grid icons)
   zp2 = %w(marketing orbit realty sidebar store tables workspace)
   ZESB_PAGES = zp1 + zp2
-  SMSO_PAGES = %w(index)
-  HOME_PAGES = %w(index)
+  SMSO_PAGES = %w(index not_found)
+  HOME_PAGES = %w(index not_found not_authorized)
 
   get_pages ZESB_PAGES, "zesb"
   get_pages HOME_PAGES, "home"
@@ -24,6 +24,6 @@ SMSO::Application.routes.draw do
   resources :members
   resources :team_tweets
 
-  root :to => 'home#index'
+  root :to => 'smso#index'
 
 end

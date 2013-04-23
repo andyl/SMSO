@@ -99,6 +99,7 @@ class BaseMigration < ActiveRecord::Migration
       t.integer  "user_id"
       t.integer  "team_id"
       t.string   "typ"
+      t.boolean  "inactive",      :default => false
       t.boolean  "admin",         :default => false
       t.timestamps
     end

@@ -15,7 +15,6 @@ class Team < ActiveRecord::Base
   # ----- Callbacks -----
   
   # ----- Scopes -----
-  default_scope { where(id: Team.current_id) }
 
   # ----- Class Methods ----
 

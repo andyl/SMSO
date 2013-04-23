@@ -30,7 +30,7 @@ def adduser(team, user)
 end
 
 def addtweet(team, member)
-  team.team_tweets << FactoryGirl.create(:team_tweet, :member_id => member.id)
+  team.team_tweets << FactoryGirl.create(:team_tweet, :membership_id => member.id)
   team.save
 end
 
