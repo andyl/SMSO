@@ -47,8 +47,8 @@ class SessionsController < ApplicationController
   end
 
   def user_login(user)
-    session[:member_id] = user.id
-    session[:member_name] = user.full_name
+    session[:user_id] = user.id
+    session[:user_name] = user.full_name
     user.sign_in_count   += 1
     user.last_sign_in_at = Time.now
     user.ip_address      = request.remote_ip

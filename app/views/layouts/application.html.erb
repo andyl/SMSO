@@ -6,15 +6,8 @@
 <!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
 <head>
   <meta charset="utf-8" />
-
-  <!-- Uncomment to make IE8 render like IE7 -->
-  <!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
-
-  <!-- Set the viewport width to device width for mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
-
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "vendor/custom.modernizr" %>
   <%= csrf_meta_tags %>
@@ -22,27 +15,70 @@
 
 <body>
 
-<div class="container">
-  <div class="row">
-    <div class="twelve columns">
-      <% if flash[:error] %>
-          <div class="error"><%= flash[:error] %></div>
-      <% end %>
+<nav class="top-bar">
+  <ul class="title-area">
+    <li class="name">
+      <h1>
+        <%= raw team_logo %>
+      </h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
 
-      <%if flash[:notice] %>
-          <div class="notice"><%= flash[:notice] %></div>
+  <section class="top-bar-section">
+    <ul class="right">
+      <% if user_signed_in? %>
+          <li class="divider"></li>
+          <li><a href="/members">Members</a></li>
+          <li class="divider"></li>
+          <li><a href="/paging">Paging</a></li>
+          <li class="divider"></li>
+          <li><a href="/events">Events</a></li>
+          <li class="divider"></li>
+          <li><a href="/availability">Availability</a></li>
+          <li class="divider"></li>
+          <li class="has-form">
+            <ul class="button-group">
+              <li><a href='#' class='small button'>Andy's Profile</a></li>
+              <li><a href='#' class='small button'>log out</a></li>
+            </ul>
+          </li>
+      <% else %>
+          <li class="has-form">
+            <% if ! current_page?("/login") %>
+            <%= raw link_to("log in", "/login", class: "small button") %>
+            <% end %>
+          </li>
       <% end %>
+    </ul>
+  </section>
+</nav>
 
-      <%if flash[:alert] %>
-          <div class="alert"><%= flash[:alert] %></div>
-      <% end %>
-    </div><!-- //.twelve.columns -->
-  </div><!-- //.row -->
-</div><!-- //.container -->
+<%= raw page_flash %>
 
 <%= yield %>
 
+<div class='footer'>
+  <div class="row">
+    <div class="large-12 columns">
+      <div class='row'>
+        <div class='large-12'>
+          <table width=100%>
+            <tbody>
+            <tr>
+              <td align=left>BAMRU Confidential</td>
+              <td align=center><%= raw debug_text if Rails.env.development? %></td>
+              <td align=right>Powered by VisiTeams</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%= javascript_include_tag "application" %>
+
 </body>
 </html>

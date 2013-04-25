@@ -19,10 +19,12 @@ mr = FactoryGirl.create(:user, first_name: "Matt",  last_name: "Rossi")
 wg = FactoryGirl.create(:user, first_name: "Will",  last_name: "Gillmore")
 la = FactoryGirl.create(:user, first_name: "Lars",  last_name: "Antholtz")
 
+Team.all.each {|team| team.destroy}
+
 t1 = FactoryGirl.create(:team, name: "SCU",    subdomain: "scu")
 t2 = FactoryGirl.create(:team, name: "ESB",    subdomain: "esb")
 t3 = FactoryGirl.create(:team, name: "SVIP",   subdomain: "svip")
-t4 = FactoryGirl.create(:team, name: "BAMRU",  subdomain: "bamru")
+t4 = FactoryGirl.create(:team, name: "BAMRU",  subdomain: "bamru", logo_text: "BAMRU.net")
 t5 = FactoryGirl.create(:team, name: "SMCSAR", subdomain: "smcsar")
 
 def adduser(team, user)

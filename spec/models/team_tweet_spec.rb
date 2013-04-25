@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: team_tweets
+#
+#  id            :integer          not null, primary key
+#  team_id       :integer
+#  membership_id :integer
+#  body          :text
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 require 'spec_helper'
 
 describe TeamTweet do

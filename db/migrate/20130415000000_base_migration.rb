@@ -1,6 +1,12 @@
 class BaseMigration < ActiveRecord::Migration
   def change
 
+    # ----- account -----
+    create_table "accounts" do |t|
+      t.string "name"
+      t.timestamps
+    end
+
     # ----- users -----
     
     create_table "users" do |t|
@@ -109,6 +115,10 @@ class BaseMigration < ActiveRecord::Migration
     create_table "teams" do |t|
       t.string      "name"
       t.string      "subdomain"
+      t.string      "logo_text"
+      t.integer     "account_id"
+      # logo_image
+      # favicon
       t.timestamps
     end
 

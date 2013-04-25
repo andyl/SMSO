@@ -973,6 +973,7 @@
 // Height and margin
 // $topbar-height: 45px;
 // $topbar-margin-bottom: emCalc(30px);
+$topbar-margin-bottom: 0;
 
 // Control Input height for top bar
 // $topbar-input-height: 2.45em;
@@ -1010,3 +1011,44 @@
 
 
 @import 'foundation';
+
+@mixin head-base {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.error {
+  @include head-base;
+  background: lightpink;
+}
+
+.notice {
+  @include head-base;
+  background: lightgreen;
+}
+
+.alert {
+  @include head-base;
+  background: lightyellow;
+}
+
+.subhead {
+  @include head-base;
+  background: lightgrey;
+  margin-bottom:  30px;
+}
+
+.footer {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  background: lightgray;
+  margin-top:  30px;
+  text-align: center;
+}
+
+.footer table {
+  border-color: lightgrey;
+  background:   lightgrey;
+  margin: 0;
+  font-size: 11pt;
+}

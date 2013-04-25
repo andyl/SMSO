@@ -9,16 +9,21 @@ class Team < ActiveRecord::Base
   has_many :users,        :through   => :memberships, :uniq => true
 
   # ----- Validations -----
-  validates_presence_of    :name, :subdomain
-  validates_uniqueness_of  :name, :subdomain
+  validates_presence_of    :name, :subdomain, :logo_text
+  validates_uniqueness_of  :name, :subdomain, :logo_text
   
   # ----- Callbacks -----
+  before_validation :set_logo_text
   
   # ----- Scopes -----
 
   # ----- Class Methods ----
 
   # ----- Instance Methods -----
+
+  def set_logo_text
+    self.logo_text = self.name if self.logo_text.blank?
+  end
 
 end
 
@@ -29,6 +34,7 @@ end
 #  id         :integer          not null, primary key
 #  name       :string(255)
 #  subdomain  :string(255)
+#  logo_text  :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
