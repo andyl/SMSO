@@ -38,10 +38,7 @@
           <li><a href="/availability">Availability</a></li>
           <li class="divider"></li>
           <li class="has-form">
-            <ul class="button-group">
-              <li><a href='#' class='small button'>Andy's Profile</a></li>
-              <li><a href='#' class='small button'>log out</a></li>
-            </ul>
+            <a href='#' class='small button split'><i class="icon-cog"></i> <%= current_user.user_name %> <span data-dropdown='userDrop'></span></a>
           </li>
       <% else %>
           <li class="has-form">
@@ -77,6 +74,10 @@
     </div>
   </div>
 </div>
+
+<ul id='userDrop' class='f-dropdown' data-dropdown-content>
+  <li><a href="/logout">log out</a></li>
+</ul>
 
 <%= javascript_include_tag "application" %>
 
