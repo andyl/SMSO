@@ -17,6 +17,7 @@ gem 'jquery-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'   # for 'has-secure-password'
 gem 'cancan'                    # access control
 gem 'parslet'                   # for address and name parsers
+gem 'font-awesome-rails'        # icon fonts
 
 # ----- web servers -----
 gem 'thin'
@@ -45,7 +46,7 @@ group :assets do
   gem 'uglifier',        '>= 1.0.3'
   gem 'sass-rails',      '~> 3.2.3'  # CSS framework
   gem 'coffee-rails',    '~> 3.2.1'  # coffeescript support
-  gem 'zurb-foundation', '~> 4.0.0'  # ui framework
+  gem 'zurb-foundation', '~> 4.1.5'  # ui framework
 end
 
 group :development, :test do
