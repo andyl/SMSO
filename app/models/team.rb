@@ -10,7 +10,10 @@ class Team < ActiveRecord::Base
 
   # ----- Validations -----
   validates_presence_of    :name, :subdomain, :logo_text
-  validates_uniqueness_of  :name, :subdomain, :logo_text
+  validates_uniqueness_of  :name, :subdomain, :logo_text, :scope => :account
+  validates_uniqueness_of  :alt_domain
+
+  validates_with AccountDomainValidator
   
   # ----- Callbacks -----
   before_validation :set_logo_text

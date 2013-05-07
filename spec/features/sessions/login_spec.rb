@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Session", :capybara => true do
+describe "Session login", :capybara => true do
 
   it "renders /login" do
     visit "/login"
@@ -9,13 +9,14 @@ describe "Session", :capybara => true do
   end
 
   it "handles a valid login" do
-    @user = FactoryGirl.create :user
+    @user = Factory.create :user
     visit "/login"
     fill_in "User name", with: @user.id
     fill_in "Password",  with: "welcome"
     click_button "Log in"
     current_path.should == root_path
     page.should_not be_nil
+    page.should have_content @user.user_name
   end
 
   it "handles invalid login" do
@@ -26,6 +27,22 @@ describe "Session", :capybara => true do
     current_path.should == "/sessions"
     page.should_not be_nil
     page.should have_content "Invalid user name or password"
+  end
+
+  it "handles logout via path" do
+    user = capy_login
+    page.should have_content user.user_name
+    visit '/logout'
+    page.should_not have_content user.user_name
+  end
+
+  it "handles logout via button", :js => true do
+    user = capy_login
+    page.should have_content user.user_name
+    page.find('#navDrop').click()
+    page.should have_content "log out"
+    click_link 'log out'
+    page.should_not have_content user.user_name
   end
 
 end

@@ -30,8 +30,8 @@ class SessionsController < ApplicationController
 
   def destroy
     #ActiveSupport::Notifications.instrument("logout.browser", {:member => current_member})
-    session[:member_id] = nil
-    session[:member_name] = nil
+    session[:user_id] = nil
+    session[:user_name] = nil
     cookies[:remember_me_token] = nil
     redirect_to root_path, :notice => "Logged out!"
   end

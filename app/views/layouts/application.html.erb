@@ -38,7 +38,7 @@
           <li><a href="/availability">Availability</a></li>
           <li class="divider"></li>
           <li class="has-form">
-            <a href='#' class='small button split'><i class="icon-cog"></i> <%= current_user.user_name %> <span data-dropdown='userDrop'></span></a>
+            <a href='#' class='small button split'><i class="icon-cog"></i> <%= current_user.user_name %> <span id='navDrop' data-dropdown='userDrop'></span></a>
           </li>
       <% else %>
           <li class="has-form">
@@ -65,7 +65,7 @@
             <tr>
               <td align=left>BAMRU Confidential</td>
               <td align=center><%= raw debug_text if Rails.env.development? %></td>
-              <td align=right>Powered by VisiTeams</td>
+              <td align=right>Powered by X440</td>
             </tr>
             </tbody>
           </table>
@@ -75,7 +75,7 @@
   </div>
 </div>
 
-<ul id='userDrop' class='f-dropdown' data-dropdown-content>
+<ul id='userDrop' class='f-dropdown micro' data-dropdown-content>
   <li><a href="/logout">log out</a></li>
 </ul>
 

@@ -6,7 +6,10 @@ class Account < ActiveRecord::Base
   has_many :teams,        :dependent => :destroy
 
   # ----- Validations -----
-  validates_presence_of    :name
+  validates_presence_of    :name, :domain
+  validates_uniqueness_of  :name, :domain
+
+  validates_with TeamAltDomainValidator
 
   # ----- Callbacks -----
 

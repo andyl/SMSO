@@ -33,12 +33,12 @@ module ApplicationHelper
 
   def gen_flash(klas, message)
     <<-HTML
-      <div class='#{klas}'>
+      <div id='#{klas}Flash' class='#{klas}'>
         <div class="row">
           <div class="large-12 columns">
             <div class='row'>
               <div class='large-12'>
-                #{message}
+                #{message} <i class='icon-remove-circle ml10 flashClose' data-tgtcontainer='#{klas}Flash'></i>
               </div>
             </div>
           </div>

@@ -1,17 +1,3 @@
-# == Schema Information
-#
-# Table name: memberships
-#
-#  id         :integer          not null, primary key
-#  user_id    :integer
-#  team_id    :integer
-#  typ        :string(255)
-#  inactive   :boolean          default(FALSE)
-#  admin      :boolean          default(FALSE)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-
 require 'spec_helper'
 
 describe Membership do
@@ -39,6 +25,15 @@ describe Membership do
     it "saves the object to the database" do
       @obj = Membership.create(valid_params)
       @obj.should be_valid
+    end
+
+    it "creates memberships with factories" do
+      @user = Factory.create :user
+      @team = Factory.create :team
+      @mobj = Factory.create :membership, :user_id => @user.id, :team_id => @team.id
+      @mobj.should be_valid
+      @mobj.team.should == @team
+      @mobj.user.should == @user
     end
 
   end

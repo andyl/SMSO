@@ -46,7 +46,7 @@ group :assets do
   gem 'uglifier',        '>= 1.0.3'
   gem 'sass-rails',      '~> 3.2.3'  # CSS framework
   gem 'coffee-rails',    '~> 3.2.1'  # coffeescript support
-  gem 'zurb-foundation', '~> 4.1.5'  # ui framework
+  gem 'zurb-foundation', '~> 4.1.6'  # ui framework
 end
 
 group :development, :test do
@@ -62,6 +62,7 @@ group :development, :test do
   gem "launchy"                  # needed for 'save and open page'
   gem "capybara"                 # used for feature specs
   gem "rspec-rails"              # RSPEC
+  gem "capybara-webkit", github: 'thoughtbot/capybara-webkit', branch: 'master'
   gem "shoulda-matchers"         # 'should_belong_to' matchers
   gem "database_cleaner"         # empty database between test runs
   gem "factory_girl_rails"       # defined in spec/factory.rb

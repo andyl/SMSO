@@ -2,9 +2,14 @@ Factory = FactoryGirl
 
 Factory.define do
 
+  factory :account do
+    sequence :name     do "Account#{n}"     end
+    sequence :domain   do "account#{n}.com" end
+  end
+
   factory :team do
-    sequence :name      do |n| "Team#{n}" end
-    sequence :subdomain do |n| "team#{n}" end
+    sequence :name      do |n| "Team#{n}"     end
+    sequence :subdomain do |n| "team#{n}.com" end
   end
 
   factory :team_tweet do
