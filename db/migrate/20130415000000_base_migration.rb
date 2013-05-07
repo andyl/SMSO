@@ -118,11 +118,10 @@ class BaseMigration < ActiveRecord::Migration
       t.string      "typ"           # team type [Account | Field]
       t.integer     "account_id"    # team account
       t.string      "name"          # team name
-      t.string      "logo_text"     # goes on nav bar
-      # logo_image
-      # favicon
       t.string      "subdomain"     # <subdomain>.<account_domain>
       t.string      "altdomain"     # alternative FQDN
+      t.string      "logo_text"     # goes on nav bar
+      # favicon                     # goes on nav bar and browser tab
       t.timestamps
     end
 

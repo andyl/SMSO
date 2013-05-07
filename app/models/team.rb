@@ -10,6 +10,9 @@ class Team < ActiveRecord::Base
   has_many   :users,        :through   => :memberships, :uniq => true
 
   # ----- Validations -----
+  validates :typ, :presence => true
+  validates :typ, :format   => { :with => /account|field/ }
+
   validates_presence_of    :name, :subdomain, :logo_text
   validates_uniqueness_of  :name, :subdomain, :logo_text, :scope => :account_id
   validates_uniqueness_of  :altdomain, :allow_blank => true

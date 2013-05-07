@@ -5,7 +5,8 @@ describe Account do
   def valid_params
     {
       name:   "AccountX",
-      domain: "account.com"
+      domain: "account.com",
+      typ:    "enterprise"
     }
   end
 
@@ -36,8 +37,13 @@ describe Account do
 
   describe "Validations" do
      context "self-contained" do
-       it { should validate_presence_of(:name)                }
-       it { should validate_presence_of(:domain)              }
+       it { should validate_presence_of(:typ)                    }
+       it { should validate_presence_of(:name)                   }
+       it { should validate_presence_of(:domain)                 }
+       it { should allow_value('enterprise').for(:typ)           }
+       it { should allow_value('hosting').for(:typ)              }
+       it { should allow_value('support').for(:typ)              }
+       it { should_not allow_value('zzz').for(:typ)              }
      end
      context "inter-object" do
        before(:each) { Account.create!(valid_params) }

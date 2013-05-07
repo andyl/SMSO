@@ -6,6 +6,9 @@ class Account < ActiveRecord::Base
   has_many :teams, :dependent => :destroy
 
   # ----- Validations -----
+  validates :typ, :presence => true
+  validates :typ, :format   => { :with => /enterprise|hosting|support/ }
+
   validates_presence_of    :name, :domain
   validates_uniqueness_of  :name, :domain
 

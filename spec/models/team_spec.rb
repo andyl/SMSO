@@ -5,12 +5,14 @@ describe Team do
   def valid_params
     {
       name:       "TeamX",
-      subdomain:  "teamx"
+      subdomain:  "teamx",
+      typ:        "field"
     }
   end
 
   describe "Object Attributes" do
     before(:each) { @obj = FactoryGirl.build(:team) }
+    specify { @obj.should respond_to(:typ)         }
     specify { @obj.should respond_to(:name)        }
     specify { @obj.should respond_to(:subdomain)   }
     specify { @obj.should respond_to(:altdomain)   }
@@ -41,9 +43,13 @@ describe Team do
 
   describe "Validations" do
      context "self-contained" do
+       it { should validate_presence_of(:typ)                    }
        it { should validate_presence_of(:name)                   }
        it { should validate_presence_of(:subdomain)              }
        it { should validate_presence_of(:logo_text)              }
+       it { should allow_value('field').for(:typ)                }
+       it { should allow_value('account').for(:typ)              }
+       it { should_not allow_value('zzz').for(:typ)              }
      end
      context "inter-object" do
        before(:each) { Team.create!(valid_params) }
@@ -57,13 +63,26 @@ describe Team do
 
     context "within an account" do
 
-      it "is not valid"
+      it "is not valid" do
+        @account = Factory.create :account
+        @team1   = Factory.create :team, account_id: @account.id
+        @team2   = Factory.build  :team, account_id: @account.id, subdomain: @team1.subdomain
+        @team2.should_not be_valid
+        @team2.subdomain = "asdf"
+        @team2.should be_valid
+      end
 
     end
 
-    context "across accounts" do
+    context "across different accounts" do
 
-      it "is valid"
+      it "is valid" do
+        @account1 = Factory.create :account
+        @account2 = Factory.create :account
+        @team1    = Factory.create :team, account_id: @account1.id
+        @team2    = Factory.build  :team, account_id: @account2.id, subdomain: @team1.subdomain
+        @team2.should be_valid
+      end
 
     end
 
@@ -81,4 +100,4 @@ end
 #  logo_text  :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#
+#2
