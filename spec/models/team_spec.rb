@@ -11,9 +11,10 @@ describe Team do
 
   describe "Object Attributes" do
     before(:each) { @obj = FactoryGirl.build(:team) }
-    specify { @obj.should respond_to(:name)       }
-    specify { @obj.should respond_to(:subdomain)  }
-    specify { @obj.should respond_to(:logo_text)  }
+    specify { @obj.should respond_to(:name)        }
+    specify { @obj.should respond_to(:subdomain)   }
+    specify { @obj.should respond_to(:altdomain)   }
+    specify { @obj.should respond_to(:logo_text)   }
   end
 
   describe "Object Creation" do
@@ -32,6 +33,7 @@ describe Team do
 
   describe "Associations" do
      before(:each) { @obj = Team.new }
+     specify { @obj.should respond_to(:account)         }
      specify { @obj.should respond_to(:users)           }
      specify { @obj.should respond_to(:memberships)     }
      specify { @obj.should respond_to(:team_tweets)     }
@@ -49,6 +51,22 @@ describe Team do
        it { should validate_uniqueness_of(:subdomain)        }
        it { should validate_uniqueness_of(:logo_text)        }
      end
+  end
+
+  describe "Duplicate subdomains" do
+
+    context "within an account" do
+
+      it "is not valid"
+
+    end
+
+    context "across accounts" do
+
+      it "is valid"
+
+    end
+
   end
 
 end

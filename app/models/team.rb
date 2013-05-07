@@ -4,14 +4,15 @@ class Team < ActiveRecord::Base
   cattr_accessor :current_id
 
   # ----- Associations -----
-  has_many :team_tweets,  :dependent => :destroy
-  has_many :memberships,  :dependent => :destroy
-  has_many :users,        :through   => :memberships, :uniq => true
+  has_one    :account
+  has_many   :team_tweets,  :dependent => :destroy
+  has_many   :memberships,  :dependent => :destroy
+  has_many   :users,        :through   => :memberships, :uniq => true
 
   # ----- Validations -----
   validates_presence_of    :name, :subdomain, :logo_text
-  validates_uniqueness_of  :name, :subdomain, :logo_text, :scope => :account
-  validates_uniqueness_of  :alt_domain
+  validates_uniqueness_of  :name, :subdomain, :logo_text, :scope => :account_id
+  validates_uniqueness_of  :altdomain, :allow_blank => true
 
   validates_with AccountDomainValidator
   

@@ -8,6 +8,8 @@
 
 require 'factory_girl_rails'
 
+puts "Creating users"
+
 User.all.each {|usr| usr.destroy}
 
 al = FactoryGirl.create(:user, first_name: "Andy",  last_name: "Leak")
@@ -19,13 +21,21 @@ mr = FactoryGirl.create(:user, first_name: "Matt",  last_name: "Rossi")
 wg = FactoryGirl.create(:user, first_name: "Will",  last_name: "Gillmore")
 la = FactoryGirl.create(:user, first_name: "Lars",  last_name: "Antholtz")
 
+puts "Creating accounts"
+
+Account.all.each {|account| account.destroy}
+
+a1 = FactoryGirl.create(:account, name: "SMSO-ESB", domain: "smso-esb.net")
+
+puts "Creating teams"
+
 Team.all.each {|team| team.destroy}
 
-t1 = FactoryGirl.create(:team, name: "SCU",    subdomain: "scu")
-t2 = FactoryGirl.create(:team, name: "ESB",    subdomain: "esb")
-t3 = FactoryGirl.create(:team, name: "SVIP",   subdomain: "svip")
-t4 = FactoryGirl.create(:team, name: "BAMRU",  subdomain: "bamru", logo_text: "BAMRU.net")
-t5 = FactoryGirl.create(:team, name: "SMCSAR", subdomain: "smcsar")
+t1 = FactoryGirl.create(:team, account: a1, name: "SCU",    subdomain: "scu")
+t2 = FactoryGirl.create(:team, account: a1, name: "ESB",    subdomain: "esb")
+t3 = FactoryGirl.create(:team, account: a1, name: "SVIP",   subdomain: "svip")
+t4 = FactoryGirl.create(:team, account: a1, name: "BAMRU",  subdomain: "bamru", logo_text: "BAMRU.net")
+t5 = FactoryGirl.create(:team, account: a1, name: "SMCSAR", subdomain: "smcsar")
 
 def adduser(team, user)
   FactoryGirl.create(:membership, :team_id => team.id, :user_id => user.id)
@@ -36,6 +46,8 @@ def addtweet(team, member)
   team.save
 end
 
+puts "Adding users to teams"
+
 adduser t1, db
 adduser t1, la
 adduser t2, js
@@ -45,6 +57,8 @@ adduser t4, wg
 adduser t4, la
 adduser t5, ml
 adduser t5, mr
+
+puts "Adding tweets to teams"
 
 addtweet(t1, db)
 addtweet(t1, db)

@@ -3,7 +3,7 @@ class Account < ActiveRecord::Base
   # ----- Attributes -----
 
   # ----- Associations -----
-  has_many :teams,        :dependent => :destroy
+  has_many :teams, :dependent => :destroy
 
   # ----- Validations -----
   validates_presence_of    :name, :domain

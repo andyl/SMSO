@@ -3,6 +3,7 @@ class BaseMigration < ActiveRecord::Migration
 
     # ----- account -----
     create_table "accounts" do |t|
+      t.string "typ"       # account type [Enterprise | Hosting | Support]
       t.string "name"      # account name
       t.string "domain"    # account domain
       t.timestamps
@@ -114,13 +115,14 @@ class BaseMigration < ActiveRecord::Migration
     # ----- team data -----
     
     create_table "teams" do |t|
-      t.integer     "account_id"
-      t.string      "name"         # team name
-      t.string      "logo_text"    # goes on nav bar
+      t.string      "typ"           # team type [Account | Field]
+      t.integer     "account_id"    # team account
+      t.string      "name"          # team name
+      t.string      "logo_text"     # goes on nav bar
       # logo_image
       # favicon
-      t.string      "subdomain"    # <subdomain>.<account_domain>
-      t.string      "alt_domain"   # alternative domain
+      t.string      "subdomain"     # <subdomain>.<account_domain>
+      t.string      "altdomain"     # alternative FQDN
       t.timestamps
     end
 

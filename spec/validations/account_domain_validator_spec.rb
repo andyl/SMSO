@@ -19,9 +19,23 @@ describe AccountDomainValidator do
 
     context "when Team#alt_domain is not blank" do
 
-      context "with conflicting Account domain"
+      context "with conflicting Account domain" do
 
-      context "with no conflicting Account domain"
+        it "is not valid" do
+          @team.update_attributes altdomain: @account.domain
+          @team.should_not be_valid
+        end
+
+      end
+
+      context "with no conflicting Account domain" do
+
+        it "is valid" do
+          @team.update_attributes altdomain: "test.com"
+          @team.should be_valid
+        end
+
+      end
 
     end
 

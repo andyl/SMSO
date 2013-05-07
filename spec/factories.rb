@@ -3,8 +3,8 @@ Factory = FactoryGirl
 Factory.define do
 
   factory :account do
-    sequence :name     do "Account#{n}"     end
-    sequence :domain   do "account#{n}.com" end
+    sequence :name     do |n| "Account#{n}"     end
+    sequence :domain   do |n| "account#{n}.com" end
   end
 
   factory :team do
