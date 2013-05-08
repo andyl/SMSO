@@ -5,7 +5,8 @@ Factory.define do
   factory :account do
     typ "enterprise"
     sequence :name     do |n| "Account#{n}"     end
-    sequence :domain   do |n| "account#{n}.com" end\
+    sequence :domain   do |n| "account#{n}.com" end
+    account_team_id 1
   end
 
   factory :team do

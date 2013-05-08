@@ -6,6 +6,7 @@ class BaseMigration < ActiveRecord::Migration
       t.string "typ"       # account type [Enterprise | Hosting | Support]
       t.string "name"      # account name
       t.string "domain"    # account domain
+      t.integer "account_team_id"
       t.timestamps
     end
 

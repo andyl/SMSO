@@ -78,7 +78,7 @@ describe Team do
 
       it "is valid" do
         @account1 = Factory.create :account
-        @account2 = Factory.create :account
+        @account2 = Factory.create :account, account_team_id: 2
         @team1    = Factory.create :team, account_id: @account1.id
         @team2    = Factory.build  :team, account_id: @account2.id, subdomain: @team1.subdomain
         @team2.should be_valid

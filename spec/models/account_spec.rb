@@ -6,14 +6,17 @@ describe Account do
     {
       name:   "AccountX",
       domain: "account.com",
-      typ:    "enterprise"
+      typ:    "enterprise",
+      account_team_id: 1
     }
   end
 
   describe "Object Attributes" do
     before(:each) { @obj = Factory.build(:account) }
-    specify { @obj.should respond_to(:name)        }
-    specify { @obj.should respond_to(:domain)      }
+    specify { @obj.should respond_to(:typ)              }
+    specify { @obj.should respond_to(:name)             }
+    specify { @obj.should respond_to(:domain)           }
+    specify { @obj.should respond_to(:account_team_id)  }
   end
 
   describe "Object Creation" do
@@ -40,6 +43,7 @@ describe Account do
        it { should validate_presence_of(:typ)                    }
        it { should validate_presence_of(:name)                   }
        it { should validate_presence_of(:domain)                 }
+       it { should validate_presence_of(:account_team_id)        }
        it { should allow_value('enterprise').for(:typ)           }
        it { should allow_value('hosting').for(:typ)              }
        it { should allow_value('support').for(:typ)              }
@@ -49,6 +53,7 @@ describe Account do
        before(:each) { Account.create!(valid_params) }
        it { should validate_uniqueness_of(:name)             }
        it { should validate_uniqueness_of(:domain)           }
+       it { should validate_uniqueness_of(:account_team_id)  }
      end
   end
 
