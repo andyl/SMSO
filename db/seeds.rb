@@ -25,7 +25,7 @@ puts "Creating accounts"
 
 Account.all.each {|account| account.destroy}
 
-a1 = FactoryGirl.create(:account, name: "SMSO-ESB", domain: "smso-esb.net")
+a1 = AccountCreationSvc.create("SMSO-ESB", "smso-esb.net")
 
 puts "Creating teams"
 
@@ -48,6 +48,7 @@ end
 
 puts "Adding users to teams"
 
+adduser a1.account_team, al
 adduser t1, db
 adduser t1, la
 adduser t2, js

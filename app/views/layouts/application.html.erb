@@ -76,7 +76,7 @@
 </div>
 
 <ul id='userDrop' class='f-dropdown micro' data-dropdown-content>
-  <li><a href="/logout">log out</a></li>
+  <%= raw UserMenuSvc.header_nav(current_user, current_team) %>
 </ul>
 
 <%= javascript_include_tag "application" %>
