@@ -3,8 +3,8 @@ class Account < ActiveRecord::Base
   # ----- Attributes -----
 
   # ----- Associations -----
-  has_many :teams,        :dependent  => :destroy
-  has_one  :account_team, :class_name => 'Team'
+  has_many    :teams,        :dependent  => :destroy
+  belongs_to  :account_team, :class_name => 'Team'
 
   # ----- Validations -----
   validates :typ, :presence => true

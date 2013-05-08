@@ -48,6 +48,7 @@ end
 
 puts "Adding users to teams"
 
+debugger
 adduser a1.account_team, al
 adduser t1, db
 adduser t1, la
