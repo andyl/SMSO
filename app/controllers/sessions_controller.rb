@@ -3,13 +3,11 @@ class SessionsController < ApplicationController
   skip_around_filter :scope_current_team
 
   def new
-    #member = Member.find_by_remember_me_token(cookies[:remember_me_token])
-    member = nil
-    unless member.nil?
-      session[:member_id] = member.id
-      session[:member_name] = member.short_name
-      ActiveSupport::Notifications.instrument("login.browser.cookie", {:member => member})
-      redirect_to (session[:tgt_path] || root_path), :notice => "Welcome back #{member.first_name}"
+    user = User.find_by_remember_me_token(cookies[:remember_me_token])
+    unless user.nil?
+      session[:user_id]   = user.id
+      session[:user_name] = user.full_name
+      redirect_to (session[:tgt_path] || root_path), :notice => "Welcome back #{user.first_name}"
     end
   end
 
