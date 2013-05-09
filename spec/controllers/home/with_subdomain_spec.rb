@@ -45,9 +45,9 @@ describe HomeController, "with a subdomain" do
         controller.current_membership.should be_nil
       end
 
-      it "redirects to /home/not_authorized" do
+      it "redirects to /info/no_access" do
         get :index
-        response.should redirect_to "/home/not_authorized"
+        response.should redirect_to "/info/no_access"
       end
 
     end
@@ -73,7 +73,7 @@ describe HomeController, "with a subdomain" do
 
       it "renders /home/index" do
         get :index
-        response.status.should == 200
+        response.status.should == 302
       end
 
     end

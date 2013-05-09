@@ -1,15 +1,9 @@
 class HomeController < ApplicationController
 
   skip_around_filter :scope_current_team
-  before_filter      :authenticate_membership!
+  before_filter      :authenticate_active!
 
   def index
-  end
-
-  def not_found
-  end
-
-  def not_authorized
   end
 
 end

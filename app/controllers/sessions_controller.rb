@@ -29,8 +29,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    #ActiveSupport::Notifications.instrument("logout.browser", {:member => current_member})
-    session[:user_id] = nil
+    session[:user_id]   = nil
     session[:user_name] = nil
     cookies[:remember_me_token] = nil
     redirect_to root_path, :notice => "Logged out!"
@@ -51,8 +50,7 @@ class SessionsController < ApplicationController
     session[:user_name] = user.full_name
     user.sign_in_count   += 1
     user.last_sign_in_at = Time.now
-    user.ip_address      = request.remote_ip
-    user.password        = ""
+    user.password              = ""
     user.password_confirmation = ""
     user.save
   end

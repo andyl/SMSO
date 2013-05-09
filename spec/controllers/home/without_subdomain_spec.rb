@@ -13,11 +13,11 @@ describe HomeController, "without subdomain" do
         controller.current_membership.should be_nil
       end
 
-      it "redirects to http:///domain_not_found" do
+      it "redirects to http:///info/domain_not_found" do
         request.subdomain.should == ""
         get :index
         response.status.should == 302
-        response.should redirect_to "http:///domain_not_found"
+        response.should redirect_to "http:///info/domain_not_found"
       end
 
     end
@@ -44,9 +44,9 @@ describe HomeController, "without subdomain" do
         controller.current_membership.should be_nil
       end
 
-      it "redirects to http:///domain_not_found" do
+      it "redirects to http:///info/domain_not_found" do
         get :index
-        response.should redirect_to "http:///domain_not_found"
+        response.should redirect_to "http:///info/domain_not_found"
       end
 
     end

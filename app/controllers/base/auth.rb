@@ -10,7 +10,7 @@ class ActionController::Base
 
   def current_membership
     return nil if current_team.nil?
-    @current_membership ||= Membership.where(user_id: session[:user_id], inactive: false).first if session[:user_id]
+    @current_membership ||= Membership.where(user_id: session[:user_id]).first if session[:user_id]
   end
   helper_method :current_membership
 
@@ -21,7 +21,24 @@ class ActionController::Base
 
   # ----- predicates -----
 
+  def admin_member?
+    %w(admin).include? current_membership.try(:typ)
+  end
+
+  def active_member?
+    %w(admin active).include? current_membership.try(:typ)
+  end
+
+  def guest_member?
+    %w(admin active guest).include? current_membership.try(:typ)
+  end
+
+  def inactive_member?
+    %w(inactive).include? current_membership.try(:typ)
+  end
+
   def no_current_team? ; ! current_team ;  end
+  helper_method :no_current_team?
 
   def valid_membership?; !current_membership.nil?  end
   def invalid_membership?; current_membership.nil?   end
@@ -36,7 +53,7 @@ class ActionController::Base
   def set_team_id
     return if [request.domain, request.subdomain] == [session[:team_domain], session[:team_subdomain]]
     account, team = TeamLocatorSvc.find(request.domain, request.subdomain)
-    (domain_not_found        ; return false) if account.nil?
+    (dom_not_found           ; return false) if account.nil?
     (team_not_found(account) ; return false) if team.nil?
     session[:team_id]        = team.id
     session[:team_domain]    = request.domain
@@ -49,36 +66,44 @@ class ActionController::Base
     session[:team_subdomain] = ""
   end
 
-  def domain_not_found
+  def dom_not_found
     reset_team_session
-    redirect_to "http://#{Account.fallback.try(:domain)}/domain_not_found"
+    redirect_to "http://#{Account.fallback.try(:domain)}/info/domain_not_found"
   end
 
   def team_not_found(account)
     reset_team_session
-    redirect_to "http://#{account.domain}/team_not_found"
+    redirect_to "http://#{account.domain}/info/team_not_found"
   end
 
   # ----- web authentication -----
 
-  def authenticate_membership!
-    if no_current_team?
-      redirect_to "http://#{request.domain}/smso/not_found"
-      return false
-    end
-    if authenticate_user!
-      redirect_to "/home/not_authorized" if invalid_membership?
-    end
+  def _authenticate_member(role_test)
+    return unless authenticate_user!
+    redirect_to('/info/inactive') and return  if inactive_member?
+    redirect_to('/info/no_access') and return unless role_test
+  end
+
+  def authenticate_admin!
+    _authenticate_member admin_member?
+  end
+
+  def authenticate_active!
+    _authenticate_member active_member?
+  end
+
+  def authenticate_guest!
+    _authenticate_member guest_member?
   end
 
   def authenticate_user!
-    if user_not_signed_in?
+    if user_signed_in?
+      return true
+    else
       session[:tgt_subdomain] = request.subdomain
       session[:tgt_path]      = request.url
       redirect_to '/login', :alert => "You must log in to access this page"
       return false
-    else
-      return true
     end
   end
 

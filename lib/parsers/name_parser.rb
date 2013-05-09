@@ -3,17 +3,22 @@
 # This script parses Names, and extracts:
 # - a title         (optional)
 # - a first name    (required)
-# - a middle name   (required)
+# - a middle name   (optional)
 # - a last name     (required)
 #
-# For development, execute this from the command line to run the test cases.
+# The script depends on the Parslet gem, written by Florian Hanke
+# and maintained by Kaspar Schiess.
 #
-# For production, just require the file, then:
-#     address_hash = Parsers::NameParser.new.parse(input_string)
+# For development, execute this script from the command line to run the test cases.
+#
+# For production, require parsers/name_parser, then:
+#     name_hash = Parsers::NameParser.new.parse(input_string)
 #
 # This parser works pretty well, but doesn't handle multiple middle names.
+# Also it doesn't handle 'Jr' or 'III'...
+#
 # To handle multiple middle names, explore one of two approaches:
-# 1. post a query to the Parslet mailing list to see if anyone know
+# 1. post to the Parslet mailing list to see if anyone knows a solution
 # 2. make a two-pass parser.
 # - First Pass: pull off the last name
 # - Second Pass: parse the rest of the text and grab the remaining fields
@@ -82,6 +87,7 @@ module Parsers
     rule(:anchor)      { anchor_match >> space }
     rule(:article)     { article_match >> space }
 
+    # Match Elements
     rule(:title)       { title_match.as(:title) >> space }
     rule(:first_name)  { word.as(:first_name) >> space }
     rule(:middle_name) { word.as(:middle_name) >> space }

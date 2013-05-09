@@ -1,61 +1,27 @@
-<!-- Navigation -->
-
-<nav class="top-bar">
-  <ul class="title-area">
-    <!-- Title Area -->
-    <li class="name">
-      <h1>
-        <a href="#">
-          SMSO-ESB
-        </a>
-      </h1>
-    </li>
-  </ul>
-
-  <section class="top-bar-section">
-    <!-- Right Nav Section -->
-
-  </section>
-</nav>
-
-<!-- End Top Bar -->
-
+<p></p>
 <div class="row">
   <div class="large-12 columns">
 
-    <!-- Standard Header -->
-
     <div class="row">
       <div class="large-12">
-        <b>Welcome</b><p></p>
+        <b>Welcome <%= current_user.first_name %></b><p></p>
         This site is Under Construction!!<p></p>
       </div>
-      <div class="large-12">
-        <b>Identification</b><p></p>
-        <li>Your team name is <%= current_team.name %></li>
-        <li>Your memberID is <%= current_membership.id %></li>
-        <li>Your full name is <%= current_user.name %></li>
-        <li>Your userID is <%= current_user.id %></li>
-      </div>
     </div>
-
-    <!-- End Feed -->
-
+    <div class="row">
+    <div class="large-6 columns">
+      <b>Identification</b><p></p>
+      <li>Your team name is <%= current_team.name %></li>
+      <li>Your userID is <%= current_user.id %></li>
+      <li>Your memberID is <%= current_membership.id %></li>
+      <li>Your full name is <%= current_user.full_name %></li>
+      <li>Your membership role is <%= current_membership.typ %></li>
+    </div>
+    <div class="large-6 columns">
+      <a href='/zesb/index' class='button'>Style Mockups</a>
+    </div>
   </div>
+
 </div>
-
-    <!-- End Content -->
-
-
-    <!-- Footer -->
-
-    <footer class="row">
-      <div class="large-12 columns"><hr>
-        <div class="row">
-
-            <p>Send questions/feedback to Andy Leak - andy@r210.com - 650-823-0836</p>
-
-        </div>
-      </div>
-    </footer>
+</div>
 

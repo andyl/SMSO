@@ -1058,6 +1058,14 @@ $topbar-margin-bottom: 0;
   padding: 5px;
 }
 
+.f-dropdown a.danger {
+  background-color: lightgoldenrodyellow;
+}
+
+.f-dropdown a.danger:hover {
+  background-color: #DDDDDD;
+}
+
 .ml10 {
   margin-left: 10px;
 }

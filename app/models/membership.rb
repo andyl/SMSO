@@ -5,14 +5,14 @@ class Membership < ActiveRecord::Base
   # ----- Associations -----
   belongs_to  :user
   belongs_to  :team
-  has_one  :rank
+  has_one     :rank
 
   # ----- Validations -----
   
   # ----- Callbacks -----
   
   # ----- Scopes -----
-  default_scope { where(team_id: Team.current_id) }
+  #default_scope { where(team_id: Team.current_id) }
 
   # ----- Class Methods ----
 

@@ -17,6 +17,7 @@ describe "Session login", :capybara => true do
 
   it "handles a valid login" do
     @user = Factory.create :user
+    @member = Factory.create :membership, user_id: @user.id, team_id: @team.id, typ: 'active'
     visit "/login"
     fill_in "User name", with: @user.id
     fill_in "Password",  with: "welcome"

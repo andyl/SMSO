@@ -63,7 +63,7 @@
           <table width=100%>
             <tbody>
             <tr>
-              <td align=left>BAMRU Confidential</td>
+              <td align=left><%= current_team.try(:name) %> Confidential</td>
               <td align=center><%= raw debug_text if Rails.env.development? %></td>
               <td align=right>Powered by X440</td>
             </tr>
@@ -76,7 +76,9 @@
 </div>
 
 <ul id='userDrop' class='f-dropdown micro' data-dropdown-content>
-  <%= raw UserMenuSvc.header_nav(current_user, current_team) %>
+  <% if user_signed_in? %>
+      <%= raw UserMenuSvc.header_nav(current_user, current_team, request.env) %>
+  <% end %>
 </ul>
 
 <%= javascript_include_tag "application" %>

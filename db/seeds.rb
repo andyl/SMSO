@@ -27,7 +27,7 @@ puts "Creating accounts"
 
 a1 = AccountCreationSvc.create("SMSO",      "smso.com")
 a2 = AccountCreationSvc.create("X440",      "x440.com", "hosting")
-a3 = AccountCreationSvc.create("VisiTeams", "vt.com",   "service")
+a3 = AccountCreationSvc.create("VisiTeams", "vt.com",   "support")
 a3.set_as_fallback
 
 puts "Creating teams"
@@ -35,11 +35,11 @@ puts "Creating teams"
 t1 = FactoryGirl.create(:team, account: a1, name: "SCU",    subdomain: "scu")
 t2 = FactoryGirl.create(:team, account: a1, name: "ESB",    subdomain: "esb")
 t3 = FactoryGirl.create(:team, account: a1, name: "SVIP",   subdomain: "svip")
-t4 = FactoryGirl.create(:team, account: a1, name: "BAMRU",  subdomain: "bamru", logo_text: "BAMRU.net")
+t4 = FactoryGirl.create(:team, account: a1, name: "BAMRU",  subdomain: "bamru", logo_text: "BAMRU.net", altdomain: "bmru.net")
 t5 = FactoryGirl.create(:team, account: a1, name: "SMCSAR", subdomain: "smcsar")
 
-def adduser(team, user)
-  FactoryGirl.create(:membership, :team_id => team.id, :user_id => user.id)
+def adduser(team, user, typ = 'guest')
+  FactoryGirl.create(:membership, :team_id => team.id, :user_id => user.id, :typ => typ)
 end
 
 def addtweet(team, member)
@@ -49,18 +49,19 @@ end
 
 puts "Adding users to teams"
 
-adduser a1.account_team, al
-adduser a2.account_team, al
-adduser a3.account_team, al
+adduser a1.account_team, al, 'active'
+adduser a2.account_team, al, 'active'
+adduser a3.account_team, al, 'active'
 adduser t1, db
 adduser t1, la
 adduser t2, js
 adduser t3, cc
-adduser t4, al
-adduser t4, wg
+adduser t4, al, 'active'
+adduser t4, wg, 'admin'
 adduser t4, la
 adduser t5, ml
 adduser t5, mr
+adduser t5, al, 'active'
 
 puts "Adding tweets to teams"
 

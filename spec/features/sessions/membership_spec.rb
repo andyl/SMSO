@@ -23,21 +23,19 @@ describe "Session membership", :capybara => true do
 
     end
 
-    context "with one team membership" do
-
-      it "shows one team name" do
-        pending "create user nav helper..."
-        user = capy_login
-        team = Factory.create(:team)
-        mobj = Factory.create :membership, user_id: user.id, team_id: team.id
-        page.find('#navDrop').click()
-        page.should  have_selector("ul#userDrop li:nth-child(1)")
-        page.should  have_selector("ul#userDrop li:nth-child(2)")
-        all("#userDrop li").count.should == 2
-      end
-
-
-    end
+    #context "with one team membership" do
+    #
+    #  it "shows one team name" do
+    #    user = Factory.create :user
+    #    mem  = Factory.create :membership, team_id: @team.id, user_id: user.id
+    #    capy_login(user)
+    #    page.find('#navDrop').click()
+    #    page.should  have_selector("ul#userDrop li:nth-child(1)")
+    #    page.should  have_selector("ul#userDrop li:nth-child(2)")
+    #    all("#userDrop li").count.should == 2
+    #  end
+    #
+    #end
 
     #context "with two team memberships" do
     #

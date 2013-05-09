@@ -3,11 +3,14 @@ class BaseMigration < ActiveRecord::Migration
 
     # ----- account -----
     create_table "accounts" do |t|
-      t.string  "typ"       # account type [Enterprise | Hosting | Support]
-      t.string  "name"      # account name
-      t.string  "domain"    # account domain
-      t.integer "account_team_id"
-      t.boolean "fallback", :default => false   # use this account when nothing else matches
+      t.string  "typ"                          # [enterprise | hosting | support]
+      t.string  "name"                         # account name
+      t.string  "domain"                       # account domain
+      t.integer "account_team_id"              # every account has one 'account team'
+      # every system must have a single fallback account
+      # fallback accounts are used when someone renders an unknown domain
+      # in this situation, they are directed to Account.fallback.account_team#domain_not_found
+      t.boolean "fallback", :default => false
       t.timestamps
     end
 
@@ -19,10 +22,10 @@ class BaseMigration < ActiveRecord::Migration
       t.string   "middle_name"
       t.string   "last_name"
       t.string   "title"
+      t.boolean  "superuser",                  :default => false
       t.boolean  "developer",                  :default => false
       t.integer  "sign_in_count",              :default => 0
       t.string   "password_digest"
-      t.string   "ip_address"
       t.string   "remember_me_token"
       t.string   "forgot_password_token"
       t.datetime "remember_me_created_at"
@@ -108,9 +111,7 @@ class BaseMigration < ActiveRecord::Migration
     create_table "memberships" do |t|
       t.integer  "user_id"
       t.integer  "team_id"
-      t.string   "typ"
-      t.boolean  "inactive",      :default => false
-      t.boolean  "admin",         :default => false
+      t.string   "typ",    :default => "guest"    # [admin | active | guest | inactive]
       t.timestamps
     end
 
@@ -118,7 +119,7 @@ class BaseMigration < ActiveRecord::Migration
     
     create_table "teams" do |t|
       t.integer     "account_id"    # team account
-      t.string      "typ"           # team type [Account | Field]
+      t.string      "typ"           # [account | field]
       t.string      "name"          # team name
       t.string      "subdomain"     # <subdomain>.<account_domain>
       t.string      "altdomain"     # alternative FQDN

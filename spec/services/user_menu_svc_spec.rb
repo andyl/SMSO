@@ -2,30 +2,18 @@ require 'spec_helper'
 
 describe UserMenuSvc do
 
-  #before(:each) do
-  #  @user = FactoryGirl.create(:user)
-  #end
+  describe ".header_nav" do
 
-  #describe "#by_username" do
-  #  context "with valid userid" do
-  #    it "works with string userid" do
-  #      user = UserFinderSvc.by_username("#{@user.id}")
-  #      user.should == @user
-  #    end
-  #    it "works with integer userid" do
-  #      user = UserFinderSvc.by_username(@user.id)
-  #      user.should == @user
-  #    end
-  #    it "works with username" do
-  #      user = UserFinderSvc.by_username(@user.user_name)
-  #      user.should == @user
-  #    end
-  #    it "works with @username" do
-  #      user = UserFinderSvc.by_username("@" + @user.user_name)
-  #      user.should == @user
-  #    end
-  #  end
-  #
-  #end
+    context "with no teams"
+
+    context "with one team, on a different site"
+
+    context "with one team, on the target site"
+
+    context "with two teams, on a different site"
+
+    context "with two teams, on the target site"
+
+  end
 
 end

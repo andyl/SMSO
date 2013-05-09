@@ -9,12 +9,12 @@ SMSO::Application.routes.draw do
   zp1 = %w(index banded banner blog boxy contact feed grid icons)
   zp2 = %w(marketing orbit realty sidebar store tables workspace)
   ZESB_PAGES = zp1 + zp2
-  SMSO_PAGES = %w(index not_found)
-  HOME_PAGES = %w(index not_found not_authorized)
+  HOME_PAGES = %w(index)
+  INFO_PAGES = %w(not_authorized domain_not_found page_not_found inactive no_access not_member)
 
   get_pages ZESB_PAGES, "zesb"
   get_pages HOME_PAGES, "home"
-  get_pages SMSO_PAGES, "smso"
+  get_pages INFO_PAGES, "info"
 
   get "login"  => "sessions#new",     :as => "login"
   get "logout" => "sessions#destroy", :as => "logout"
@@ -24,6 +24,6 @@ SMSO::Application.routes.draw do
   resources :members
   resources :team_tweets
 
-  root :to => 'smso#index'
+  root :to => 'home#index'
 
 end
