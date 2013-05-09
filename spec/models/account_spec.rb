@@ -57,4 +57,20 @@ describe Account do
      end
   end
 
+  describe "#set_as_fallback" do
+
+    it "allows only one fallback account" do
+      account1 = Factory.create :account, fallback: true
+      account2 = Factory.create :account
+      account1.fallback.should be_true
+      account2.fallback.should_not be_true
+      account2.set_as_fallback
+      account1.reload
+      account2.reload
+      account1.fallback.should_not be_true
+      account2.fallback.should be_true
+    end
+
+  end
+
 end

@@ -4,7 +4,7 @@ class Team < ActiveRecord::Base
   cattr_accessor :current_id
 
   # ----- Associations -----
-  has_one    :account
+  belongs_to :account
   has_many   :team_tweets,  :dependent => :destroy
   has_many   :memberships,  :dependent => :destroy
   has_many   :users,        :through   => :memberships, :uniq => true

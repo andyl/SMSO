@@ -2,6 +2,13 @@ require 'spec_helper'
 
 describe SessionsController do
 
+  before(:each) do
+    @acct = Factory.create(:account)
+    @team = Factory.create(:team, account_id: @acct.id)
+    Team.current_id   = @team.id
+    request.host      = "#{@team.subdomain}.#{@acct.domain}"
+  end
+
   describe "GET new" do
 
     it "renders the new template" do

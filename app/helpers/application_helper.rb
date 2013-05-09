@@ -1,9 +1,9 @@
 module ApplicationHelper
 
   def team_logo
-    lbl = current_team.try(:logo_text) || "SMSO-ESB"
+    lbl = current_team.try(:logo_text) || "NO TEAM"
     link = link_to(lbl, "/")
-    "<a href='/'><img style='position: relative; bottom: -2px;' src='http://placehold.it/16x16&text=X'/> #{lbl}</a>"
+    "<a href='/'><img style='position: relative; bottom: 2px;' src='http://placehold.it/16x16&text=X'/> #{lbl}</a>"
   end
 
   def page_flash

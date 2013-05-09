@@ -8,9 +8,11 @@
 
 require 'factory_girl_rails'
 
-puts "Creating users"
+puts "Clearing old data"
+def del_all(klas) klas.all.each {|k| k.destroy}; end
+[User, Account, Team, Membership, TeamTweet].each {|k| del_all(k)}
 
-User.all.each {|usr| usr.destroy}
+puts "Creating users"
 
 al = FactoryGirl.create(:user, first_name: "Andy",  last_name: "Leak")
 db = FactoryGirl.create(:user, first_name: "Dan",   last_name: "Bennett")
@@ -23,13 +25,12 @@ la = FactoryGirl.create(:user, first_name: "Lars",  last_name: "Antholtz")
 
 puts "Creating accounts"
 
-Account.all.each {|account| account.destroy}
-
-a1 = AccountCreationSvc.create("SMSO-ESB", "smso-esb.net")
+a1 = AccountCreationSvc.create("SMSO",      "smso.com")
+a2 = AccountCreationSvc.create("X440",      "x440.com", "hosting")
+a3 = AccountCreationSvc.create("VisiTeams", "vt.com",   "service")
+a3.set_as_fallback
 
 puts "Creating teams"
-
-Team.all.each {|team| team.destroy}
 
 t1 = FactoryGirl.create(:team, account: a1, name: "SCU",    subdomain: "scu")
 t2 = FactoryGirl.create(:team, account: a1, name: "ESB",    subdomain: "esb")
@@ -48,8 +49,9 @@ end
 
 puts "Adding users to teams"
 
-debugger
 adduser a1.account_team, al
+adduser a2.account_team, al
+adduser a3.account_team, al
 adduser t1, db
 adduser t1, la
 adduser t2, js
@@ -67,8 +69,3 @@ addtweet(t1, db)
 addtweet(t1, la)
 addtweet(t4, al)
 addtweet(t4, la)
-
-
-
-
-

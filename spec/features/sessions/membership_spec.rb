@@ -2,6 +2,13 @@ require 'spec_helper'
 
 describe "Session membership", :capybara => true do
 
+  before(:each) do
+    @acct = Factory.create(:account)
+    @team = Factory.create(:team, account_id: @acct.id)
+    Team.current_id   = @team.id
+    Capybara.default_host = "http://#{@team.subdomain}.#{@acct.domain}"
+  end
+
   context "when logging into the account domain" do
 
     context "with no team memberships" do

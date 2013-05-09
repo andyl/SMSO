@@ -3,9 +3,10 @@ require 'spec_helper'
 describe HomeController, "with a subdomain" do
 
   before(:each) do
-    @team = Factory.create(:team)
-    Team.current_id = @team.id
-    request.host = "#{@team.subdomain}.example.com"
+    @acct = Factory.create(:account)
+    @team = Factory.create(:team, account_id: @acct.id)
+    Team.current_id   = @team.id
+    request.host      = "#{@team.subdomain}.#{@acct.domain}"
   end
 
   context "as a public user" do
@@ -38,6 +39,7 @@ describe HomeController, "with a subdomain" do
     describe "Get index" do
 
       it "has appropriate current-object values" do
+        get :index
         controller.current_user.should == @user
         controller.current_team.should == @team
         controller.current_membership.should be_nil
@@ -63,6 +65,7 @@ describe HomeController, "with a subdomain" do
     describe "Get index" do
 
       it "has appropriate current-object values" do
+        get :index
         controller.current_user.should        == @user
         controller.current_team.should        == @team
         controller.current_membership.should  == @membership

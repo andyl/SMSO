@@ -19,8 +19,19 @@ class Account < ActiveRecord::Base
 
   # ----- Scopes -----
 
+  def self.fallback
+    where(fallback: true).first
+  end
+
   # ----- Class Methods ----
 
   # ----- Instance Methods -----
+
+  def set_as_fallback
+    Account.where(fallback: true).all.each do |acc|
+      acc.update_attributes fallback: false
+    end
+    self.update_attributes fallback: true
+  end
 
 end

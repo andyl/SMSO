@@ -6,13 +6,13 @@ Factory.define do
     typ "enterprise"
     sequence :name     do |n| "Account#{n}"     end
     sequence :domain   do |n| "account#{n}.com" end
-    account_team_id 1
+    sequence :account_team_id do |n| n end
   end
 
   factory :team do
     typ "field"
-    sequence :name      do |n| "Team#{n}"     end
-    sequence :subdomain do |n| "team#{n}.com" end
+    sequence :name      do |n| "Team#{n}"  end
+    sequence :subdomain do |n| "team#{n}"  end
   end
 
   factory :team_tweet do

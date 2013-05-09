@@ -2,6 +2,13 @@ require 'spec_helper'
 
 describe "Smso", :capybara => true do
 
+  before(:each) do
+    @acct = Factory.create(:account)
+    @team = Factory.create(:team, account_id: @acct.id)
+    Team.current_id   = @team.id
+    Capybara.default_host = "http://#{@team.subdomain}.#{@acct.domain}"
+  end
+
   # root path points to smso#index...
   it "renders /" do
     visit "/"

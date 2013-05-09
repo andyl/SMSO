@@ -3,10 +3,11 @@ class BaseMigration < ActiveRecord::Migration
 
     # ----- account -----
     create_table "accounts" do |t|
-      t.string "typ"       # account type [Enterprise | Hosting | Support]
-      t.string "name"      # account name
-      t.string "domain"    # account domain
+      t.string  "typ"       # account type [Enterprise | Hosting | Support]
+      t.string  "name"      # account name
+      t.string  "domain"    # account domain
       t.integer "account_team_id"
+      t.boolean "fallback", :default => false   # use this account when nothing else matches
       t.timestamps
     end
 
@@ -116,8 +117,8 @@ class BaseMigration < ActiveRecord::Migration
     # ----- team data -----
     
     create_table "teams" do |t|
-      t.string      "typ"           # team type [Account | Field]
       t.integer     "account_id"    # team account
+      t.string      "typ"           # team type [Account | Field]
       t.string      "name"          # team name
       t.string      "subdomain"     # <subdomain>.<account_domain>
       t.string      "altdomain"     # alternative FQDN

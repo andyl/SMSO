@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_time_zone
+  before_filter :set_team_id
   around_filter :scope_current_team
 
   def set_time_zone

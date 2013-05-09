@@ -3,7 +3,8 @@ class ActionController::Base
   # ----- current-objects -----
 
   def current_team
-    @current_team ||= Team.find_by_subdomain request.subdomain
+    return nil if session[:team_id].blank?
+    @current_team ||= Team.find(session[:team_id])
   end
   helper_method :current_team
 
@@ -29,6 +30,34 @@ class ActionController::Base
   def user_signed_in?     ; !current_user.nil?  end
   def user_not_signed_in? ; current_user.nil?   end
   helper_method :user_signed_in?, :user_not_signed_in?
+
+  # ----- team identification/selection -----
+
+  def set_team_id
+    return if [request.domain, request.subdomain] == [session[:team_domain], session[:team_subdomain]]
+    account, team = TeamLocatorSvc.find(request.domain, request.subdomain)
+    (domain_not_found        ; return false) if account.nil?
+    (team_not_found(account) ; return false) if team.nil?
+    session[:team_id]        = team.id
+    session[:team_domain]    = request.domain
+    session[:team_subdomain] = request.subdomain
+  end
+
+  def reset_team_session
+    session[:team_id]        = ""
+    session[:team_domain]    = ""
+    session[:team_subdomain] = ""
+  end
+
+  def domain_not_found
+    reset_team_session
+    redirect_to "http://#{Account.fallback.try(:domain)}/domain_not_found"
+  end
+
+  def team_not_found(account)
+    reset_team_session
+    redirect_to "http://#{account.domain}/team_not_found"
+  end
 
   # ----- web authentication -----
 
