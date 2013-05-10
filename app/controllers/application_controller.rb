@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 
   def scope_current_team
     Team.current_id = current_team.id
-    yeild
+    yield
   ensure
     Team.current_id = nil
   end

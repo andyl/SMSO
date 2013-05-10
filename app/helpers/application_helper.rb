@@ -29,6 +29,36 @@ module ApplicationHelper
     "<b>#{params["controller"]}##{params["action"]}</b> (params: #{params.inspect})"
   end
 
+  # ----- Navigation -----
+
+  # just for administrators
+  def admin_nav
+    <<-ERB
+      <li class="has-form">
+          <a href="#" class="small button">Button 1</a>
+          <a href="#" class="small button"><i class="icon-camera-retro"></i></a>
+          <a href="#" id='navDrop' data-dropdown='userDrop' class="small button dropdown">x</a>
+      </li>
+    ERB
+  end
+
+  # for all users
+  def all_nav
+    <<-ERB
+      <li class="has-form">
+        <a href='/users/#{current_user.id}/edit' class='small button split'>#{current_user.user_name}<span id='navDrop' data-dropdown='userDrop'></span></a>
+      </li>
+    ERB
+  end
+
+  def user_nav
+    current_membership.typ == 'admin' ? all_nav : admin_nav
+  end
+
+  def team_nav
+
+  end
+
   private
 
   def gen_flash(klas, message)

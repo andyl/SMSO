@@ -24,18 +24,22 @@ class ActionController::Base
   def admin_member?
     %w(admin).include? current_membership.try(:typ)
   end
+  helper_method :admin_member?
 
   def active_member?
     %w(admin active).include? current_membership.try(:typ)
   end
+  helper_method :active_member?
 
   def guest_member?
     %w(admin active guest).include? current_membership.try(:typ)
   end
+  helper_method :guest_member?
 
   def inactive_member?
     %w(inactive).include? current_membership.try(:typ)
   end
+  helper_method :inactive_member?
 
   def no_current_team? ; ! current_team ;  end
   helper_method :no_current_team?

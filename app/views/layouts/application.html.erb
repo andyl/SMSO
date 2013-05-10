@@ -37,13 +37,11 @@
           <li class="divider"></li>
           <li><a href="/availability">Availability</a></li>
           <li class="divider"></li>
-          <li class="has-form">
-            <a href='#' class='small button split'><i class="icon-cog"></i> <%= current_user.user_name %> <span id='navDrop' data-dropdown='userDrop'></span></a>
-          </li>
+          <%= raw user_nav %>
       <% else %>
           <li class="has-form">
             <% if ! current_page?("/login") %>
-            <%= raw link_to("log in", "/login", class: "small button") %>
+              <%= raw link_to("log in", "/login", class: "small button") %>
             <% end %>
           </li>
       <% end %>
@@ -75,7 +73,7 @@
   </div>
 </div>
 
-<ul id='userDrop' class='f-dropdown micro' data-dropdown-content>
+<ul id='userDrop' class='f-dropdown micro'>
   <% if user_signed_in? %>
       <%= raw UserMenuSvc.header_nav(current_user, current_team, request.env) %>
   <% end %>

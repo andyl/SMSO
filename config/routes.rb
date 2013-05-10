@@ -19,8 +19,12 @@ SMSO::Application.routes.draw do
   get "login"  => "sessions#new",     :as => "login"
   get "logout" => "sessions#destroy", :as => "logout"
 
+  get "paging"       => "paging#index"
+  get "availability" => "availability#index"
+
   resources :sessions
   resources :users
+  resources :events
   resources :members
   resources :team_tweets
 
