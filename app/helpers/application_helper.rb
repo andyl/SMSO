@@ -52,11 +52,10 @@ module ApplicationHelper
   end
 
   def user_nav
-    current_membership.typ == 'admin' ? all_nav : admin_nav
+    current_membership.typ == 'admin' ? all_nav : all_nav
   end
 
   def team_nav
-
   end
 
   private

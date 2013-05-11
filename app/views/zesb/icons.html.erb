@@ -73,7 +73,7 @@
     <div class="row">
       <div class="large-4 columns">
         <b>Buttons and Forms</b><p></p>
-        <a class="tiny button" href="#"><i class="icon-repeat"></i> Reload</a><br/>
+        <a class="tiny button" href="#"><i class="icon-repeat"></i> Reload</a>
         <div class="button-group">
           <a class="tiny button" href="#"><i class="icon-align-left"></i></a>
           <a class="tiny button" href="#"><i class="icon-align-center"></i></a>
@@ -92,7 +92,7 @@
               <input type="text" placeholder="Email address">
             </div>
           </div>
-          </form>
+        </form>
 
       </div>
 
@@ -100,7 +100,7 @@
         <b>Icon Styling</b><p></p>
         <i class="icon-cog style1"></i><p></p>
         <i class="icon-comment style2"></i>
-        </div>
+      </div>
       <div class="large-4 columns">
         <b>Vertical Nav</b><p></p>
 
@@ -111,8 +111,44 @@
           <li><a href="#"><i class="icon-cogs"></i> Settings</a></li>
         </ul>
 
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-4 columns">
+        <b>TestA</b><p></p>
+        <form>
+          <div class="row collapse">
+            <div class="small-2 large-2 columns">
+              <span class="prefix"><i class="icon-cog"></i></span>
+            </div>
+            <div class="small-10 large-10 columns">
+              <input type="text" placeholder="Setting">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="large-4 columns">
+        <b>TestB</b><p></p>
+        <div class="has-form">
+          <a href='/users/<%= current_user.id %>/edit' class='small button split'>
+            <%= current_user.user_name %><span id='navDrop' data-dropdown='userDrop'></span>
+          </a>
         </div>
       </div>
+      <div class="large-4 columns">
+        <b>TestC</b><p></p>
+        <ul class="button-group">
+          <li>
+            <span class='has-tip' title='asdf'>
+              <a href="#" class="small button">Button 1</a>
+            </span>
+          </li>
+          <li><a href="#" class="small button"><i class="icon-camera-retro"></i></a></li>
+          <li><a href="#" id='navDrop' data-dropdown='userDrop' class="small button dropdown"><i class="icon-camera-retro"></i></a></li>
+        </ul>
+      </div>
+    </div>
 
   </div>
 </div>

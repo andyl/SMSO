@@ -1,10 +1,8 @@
 class ZesbController < ApplicationController
 
-  # before_filter :authenticate_member!
+  before_filter :authenticate_active!
 
   skip_around_filter :scope_current_team
-
-  # layout "zurb"
 
   def index;     end
 
